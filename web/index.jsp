@@ -11,14 +11,25 @@
 <html>
 <head>
     <title>TiendaMax</title>
+    <link rel="stylesheet" type="text/css" href="css/960.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-<form method="post" action="./login">
-    <label>Nombre de usuario</label><br/>
-    <input type="text" name="username"><br/>
-    <label>Password</label><br/>
-    <input type="password" name="password"  id="password"><br/>
-    <input type="submit" value="Ingresar">
-</form>
+<div class="container_16" >
+    <div class="header-container grid_16">
+        <!--logo <img src="logo">  --><h1 class="grid_5 push_1">Tienda MAX</h1>
+    </div>
+    <div class="login-container grid_5 push_5">
+        <h1>Acceso a usuarios</h1>
+         <form method="post" action="./login">
+                <label>Nombre de usuario</label><br/>
+                <input type="text" name="username"><br/>
+                <label>Password</label><br/>
+                <input type="password" name="password"  id="password"><br/>
+                <input type="submit" value="Ingresar" class="button">
+         </form>
+    </div>
+</div>
 </body>
+<script type="text/javascript" src="js/jQuery.js"></script>
 </html>
