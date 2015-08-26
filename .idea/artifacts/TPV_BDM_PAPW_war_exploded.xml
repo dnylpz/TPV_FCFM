@@ -7,6 +7,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="TPV_BDM_PAPW" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Mojarra-2.2.1" />
+          <element id="library" level="module" name="mysql-connector-java:5.1.36" module-name="TPV_BDM_PAPW" />
+        </element>
       </element>
     </root>
   </artifact>

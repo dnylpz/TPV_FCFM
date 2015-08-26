@@ -10,14 +10,15 @@
         uri="http://java.sun.com/jstl/core"%>
 <html>
 <head>
-    <title>TiendaMax</title>
+    <title>tienda max</title>
     <link rel="stylesheet" type="text/css" href="css/960.css">
+    <link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
 <div class="container_16" >
     <div class="header-container grid_16">
-        <!--logo <img src="logo">  --><h1 class="grid_5 push_1">Tienda MAX</h1>
+        <!--logo <img src="logo">  --><h1 class="grid_5 push_1">TIENDA MAX</h1>
     </div>
     <div class="login-container grid_5 push_5">
         <h1>Acceso a usuarios</h1>

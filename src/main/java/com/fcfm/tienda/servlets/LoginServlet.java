@@ -1,5 +1,9 @@
 package com.fcfm.tienda.servlets;
 
+import com.fcfm.tienda.controllers.UsuarioController;
+import com.fcfm.tienda.models.Usuario;
+import com.fcfm.tienda.services.UsuarioProvider;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +18,17 @@ import java.io.IOException;
         urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            System.out.println(request.getParameter("username"));
-
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Usuario ses;
+        ses = UsuarioProvider.getUsuario(username,password);
+        if(ses != null){
+            request.setAttribute("username",ses.getUsername());
+            request.getRequestDispatcher("/venta.jsp").forward(request,response);
+        }else{
+            request.setAttribute("invalid",true);
+            request.getRequestDispatcher("/index.jsp").forward(request,response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
