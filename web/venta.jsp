@@ -11,7 +11,9 @@
 <html>
 <head>
     <title>TiendaMax</title>
-    <link rel="stylesheet" type="text/css" href="css/960.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/skeleton.css">
+    <link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
