@@ -64,3 +64,6 @@ p{
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f4f4', endColorstr='#ededed', GradientType=0);
     /* IE6-9 */
 }
+.header{
+    background-color:#15E29D;
+}
