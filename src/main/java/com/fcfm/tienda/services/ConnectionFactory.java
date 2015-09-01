@@ -21,7 +21,7 @@ public class ConnectionFactory {
         MysqlDataSource mysqlDS= null;
         try{
             // THIS LINE HAS TO BE CHANGED DEPENDING ON ENVIRONMENT!
-            fis = new FileInputStream("C:\\Users\\dany\\Documents\\Proyectos\\TPV_BDM_PAPW\\db.properties");
+            fis = new FileInputStream("db.properties");
             props.load(fis);
             mysqlDS = new MysqlDataSource();
             mysqlDS.setURL(props.getProperty("MYSQL_DB_URL"));
