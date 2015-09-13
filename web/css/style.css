@@ -30,23 +30,15 @@
     border:3px solid #d7d5cd;
     border-radius: 10px;
 }
-.footer{
-    background-color: #355ba3;
-    position:relative;
-    color:white;
-    bottom:0px;
-}
-.footer p{
-    padding-top:3em;
-}
-
-
-.content{
-    background-color: #f4f4f4;
+.main{
+    height: 495px;
 }
 .products{
     background-color: #e7e7e7;
     padding:2em;
+    float:left;
+    width:70.55%;
+    height:29em;
 
 }
 .products p{
@@ -58,11 +50,21 @@
     width: 100px;
 }
 .sidebar{
+    padding-top:3em;
     background-color:yellow;
+    text-align: center;
+    float:right;
+    width:25%;
+    height:30em;
 }
-@media screen and (min-height: 700px){
-    .footer{
-        position:relative;
-        bottom:0px;
-    }
+.footer{
+    width:100%;
+    background-color: #355ba3;
+    color:white;
+}
+.footer-content{
+    padding:1.5em;
+}
+.footer a{
+    color:white;
 }
