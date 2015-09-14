@@ -31,14 +31,14 @@
     border-radius: 10px;
 }
 .main{
-    height: 495px;
+    height: 40em;
 }
 .products{
     background-color: #e7e7e7;
-    padding:2em;
+    padding:2em 2em 0 2em;
     float:left;
     width:70.55%;
-    height:29em;
+    height:40em;
 
 }
 .products p{
@@ -50,17 +50,26 @@
     width: 100px;
 }
 .sidebar{
-    padding-top:3em;
+    padding-top:2em;
     background-color:yellow;
     text-align: center;
     float:right;
     width:25%;
-    height:30em;
+    height:40em;
+}
+.circle{
+  border-radius:100px;
+  margin-left: 4.3em;
+  }
+
+.video{
+  border-radius:3px;
 }
 .footer{
     width:100%;
     background-color: #355ba3;
     color:white;
+    padding-top:2em;
 }
 .footer-content{
     padding:1.5em;
