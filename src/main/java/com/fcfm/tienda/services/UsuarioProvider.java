@@ -42,7 +42,8 @@ public class UsuarioProvider {
             while(rs.next()){
                 System.out.println( rs.getString(3));
                 if(rs.getString(3).equals(passHex)){
-                    session = new Usuario(rs.getInt(1),username,password);
+                    session = new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),
+                            rs.getBoolean(4),rs.getString(5),rs.getString(6));
                     return session;
                 }
             }

@@ -64,6 +64,8 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="isPasswordWrong" value="${invalid}">
 </body>
 <script type="text/javascript" src="js/jQuery.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </html>

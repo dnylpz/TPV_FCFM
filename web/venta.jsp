@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <p class="four columns offset-by-four">${username}</p>
+                    <p class="four columns offset-by-four">${loginUsuario}</p>
                 </div>
                 <div class="row">
                     <form action="/search" method="post" >

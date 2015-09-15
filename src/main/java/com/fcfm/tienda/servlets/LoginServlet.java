@@ -23,11 +23,15 @@ public class LoginServlet extends HttpServlet {
         Usuario ses;
         ses = UsuarioProvider.getUsuario(username,password);
         if(ses != null){
-            request.setAttribute("username",ses.getUsername());
-            request.getRequestDispatcher("/venta.jsp").forward(request,response);
+            request.setAttribute("username",ses.getLoginUsuario());
+            if(ses.isAdministrador()){
+                request.getRequestDispatcher("/admon.jsp").forward(request,response);
+            }else {
+                request.getRequestDispatcher("/venta.jsp").forward(request, response);
+            }
         }else{
             request.setAttribute("invalid",true);
-            request.getRequestDispatcher("/index.jsp").forward(request,response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 
