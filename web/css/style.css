@@ -82,14 +82,14 @@
   text-decoration: none;
   padding: .2em 1em;
   color:#fff;
-  background-color:#036;
+  background-color: #0067d7;
   border-top-left-radius: 10px;
   border-top-right-radius:10px;
 }
 
 .navigation ul li a:hover{
   color:#fff;
-  background-color:#369;
+  background-color: #72e5f2;
 }
 
 .footer{

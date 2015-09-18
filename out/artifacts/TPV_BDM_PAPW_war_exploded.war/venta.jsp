@@ -32,12 +32,12 @@
     <div class="main">
         <div class="products">
             <div class="container" id="product-list">
-                    <div class="product row">
-                        <div class="two columns offset-by-two columns product-image">
-                            <img src="img/product_placeholder.jpg" alt="producto"/>
-                        </div>
+                <div class="product row">
+                    <div class="two columns offset-by-two columns product-image">
+                        <img src="img/product_placeholder.jpg" alt="producto"/>
+                    </div>
                     <p class="eight columns">
-                        descripción producto
+                        descripcion producto
                         UPC:0000000000000
                         Precio Normal: $00.00 Promocion: 000000
                         Ahorra:$00.00 Precio a pagar: $00
@@ -51,22 +51,22 @@
                     <p class="four columns offset-by-four">Le Atiende</p>
                 </div>
                 <div class="row">
-                    <div class="four columns offset-by-four">
-                        <img src="" alt="foto"/>
+                    <div class="two columns">
+                        <img  class="circle" heigh="150px" width="150px" src="img/profile_placeholder.jpg" alt="foto"/>
                     </div>
                 </div>
                 <div class="row">
-                    <p class="four columns offset-by-four">${username}</p>
+                    <p class="four columns offset-by-four">Daniel Espinoza</p>
                 </div>
                 <div class="row">
                     <form action="/search" method="post" >
                         <label>INGRESE ARTICULO</label>
-                            <input type="text" name="articulo">
-                            <input type="submit" value="Agregar">
+                        <input type="text" name="articulo">
+                        <input type="submit" value="Agregar">
                     </form>
                 </div>
                 <div class="row">
-                    <p class="four columns offset-by-four">video</p>
+                    <img class="video" src="img/video_placeholder.jpg" alt="video"  height="100px" width="150px"/>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
         Usuario ses;
         ses = UsuarioProvider.getUsuario(username,password);
         if(ses != null){
-            request.setAttribute("username",ses.getLoginUsuario());
+            request.setAttribute("username",ses.getNombreUsuario() + " " +ses.getApellidoUsuario());
             if(ses.isAdministrador()){
                 request.getRequestDispatcher("/admon.jsp").forward(request,response);
             }else {
