@@ -83,11 +83,11 @@
             <div class="row">
                 <div class="six columns">
                     <h3 class="twelve columns">Video Activo</h3>
-                    <div class="twelve columns"><img src="img/video_placeholder.jpg" alt="vide" style="position: center; height:120px; width: 150px"/></div>
+                    <div class="twelve columns"><img src="img/video_placeholder.jpg" alt="vide" style=" height:120px; width: 150px"/></div>
                 </div>
                 <div class="six columns">
                     <h3 class="twelve columns">Imagen Activa</h3>
-                    <div class="twelve columns"><img src="img/video_placeholder.jpg" alt="img" style="position: center; height:120px; width: 150px"/></div>
+                    <div class="twelve columns"><img src="img/video_placeholder.jpg" alt="img" style=" height:120px; width: 150px"/></div>
                 </div>
             </div>
         </div>
