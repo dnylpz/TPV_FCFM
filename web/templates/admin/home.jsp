@@ -1,6 +1,10 @@
+<%@ page import="com.fcfm.tienda.models.Usuario" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Usuario user = (Usuario) session.getAttribute("user");
+String userName = user.getNombreUsuario() + " " + user.getApellidoUsuario();%>
 <div class="container">
   <div class="row">
-    <h2 class="seven columns">Bienvenido Daniel</h2>
+    <h2 class="twelve columns">Bienvenido <%= userName%></h2>
   </div>
   <div class="row">
     <div class="six columns">
@@ -43,11 +47,10 @@
   <div class="row">
     <div class="six columns">
       <h3 class="twelve columns">Video Activo</h3>
-      <div class="twelve columns"><img src="../img/video_placeholder.jpg" alt="vide" style=" height:120px; width: 150px"/></div>
+      <div class="twelve columns"><img src="img/video_placeholder.jpg" alt="vide" style=" height:120px; width: 150px"/></div>
     </div>
     <div class="six columns">
       <h3 class="twelve columns">Imagen Activa</h3>
-      <div class="twelve columns"><img src="../img/video_placeholder.jpg" alt="img" style=" height:120px; width: 150px"/></div>
+      <div class="twelve columns"><img src="img/video_placeholder.jpg" alt="img" style=" height:120px; width: 150px"/></div>
     </div>
   </div>
-</div>

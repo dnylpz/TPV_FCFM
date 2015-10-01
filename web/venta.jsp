@@ -1,3 +1,4 @@
+<%@ page import="com.fcfm.tienda.models.Usuario" %>
 <%--
   Created by IntelliJ IDEA.
   User: dany
@@ -15,6 +16,9 @@
     <link rel="stylesheet" type="text/css" href="css/skeleton.css">
     <link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <% Usuario user = (Usuario)session.getAttribute("user");
+        String userName = user.getNombreUsuario() + " " +  user.getApellidoUsuario();
+    %>
 </head>
 <body>
 <div class="wrapper">
@@ -25,7 +29,10 @@
                     <img src="img/tLogo.png">
                 </div>
                 <h1 class="four columns">Venta</h1>
-                <a class="two columns  offset-by-two button" href="index.jsp">Salir</a>
+                <div class="two columns offset-by-two">
+                <a class="button" href="./login" <% if(!user.isAdministrador()){%> style="visibility:hidden" <%}%>><p>Ir a admin</p></a>
+                <a class="button" href="index.jsp"><p>Salir</p></a>
+                </div>
             </div>
         </div>
     </div>
@@ -56,7 +63,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <p class="four columns offset-by-four">Daniel Espinoza</p>
+                    <p class="six columns offset-by-three"><%= userName%></p>
                 </div>
                 <div class="row">
                     <form action="/search" method="post" >

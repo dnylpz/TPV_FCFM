@@ -46,7 +46,7 @@
                     <label class="four columns offset-by-four" >Password</label>
                 </div>
                 <div class="row">
-                    <input class="four columns offset-by-four" type="password" name="password"  id="password">
+                    <input class="four columns offset-by-four" type="password" name="password"  id="passwordUsuario">
                 </div>
                 <div class="row">
                   <input type="submit" value="Ingresar" class="button-primary four columns offset-by-four">
@@ -59,12 +59,12 @@
     <div class="container">
         <div class="row">
             <div class="three columns offset-by-nine">
-                <p>&copy Derechos Reservados Dan Espinoza </p>
+                <p>&copy Derechos Reservados</p>
             </div>
         </div>
     </div>
 </div>
-<input type="hidden" id="isPasswordWrong" value="${invalid}">
+<input type="hidden" id="isPasswordWrong" value="${passwordUsuario}">
 </body>
 <script type="text/javascript" src="js/jQuery.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
