@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css/skeleton.css">
     <link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css"
     <% Usuario user = (Usuario)session.getAttribute("user");
         String userName = user.getNombreUsuario() + " " +  user.getApellidoUsuario();
     %>
@@ -46,6 +47,7 @@
         </div>
     </div>
     <div class="content">
+        <div class="popup"></div>
         <div class="container">
             <div class="row">
                 <h2 class="twelve columns">Bienvenido <%= userName%></h2>
@@ -103,5 +105,6 @@
 </div>
 <script src="js/jQuery.js" type="text/javascript"></script>
 <script src="js/admon.js" type="text/javascript"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js" type="text/javascript"></script>
 </body>
 </html>
