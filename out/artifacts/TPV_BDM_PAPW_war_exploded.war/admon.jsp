@@ -1,3 +1,4 @@
+<%@ page import="com.fcfm.tienda.models.Usuario" %>
 <%--
   Created by IntelliJ IDEA.
   User: jose.espinoza.lopez
@@ -15,6 +16,10 @@
     <link rel="stylesheet" type="text/css" href="css/skeleton.css">
     <link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css"
+    <% Usuario user = (Usuario)session.getAttribute("user");
+        String userName = user.getNombreUsuario() + " " +  user.getApellidoUsuario();
+    %>
 </head>
 <body>
 <div class="wrapper">
@@ -24,39 +29,44 @@
                 <div class="five columns">
                     <h1>Administración</h1>
                 </div>
-                <div class="five columns offset-by-two">
+                <div class="five columns">
                     <nav class="navigation">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Usuarios</a></li>
+                            <li><a href="#" id="home">Home</a></li>
+                            <li><a href="#" id="users">Usuarios</a></li>
                             <li><a href="#">Cajas</a></li>
                             <li><a href="#">Reportes</a></li>
                         </ul>
                     </nav>
                 </div>
+                <div class="two colums" >
+                    <a href="venta.jsp" class="button"><p>ir a venta</p></a>
+                    <a class="button" href="index.jsp"><p>Salir</p></a>
+                </div>
             </div>
         </div>
     </div>
     <div class="content">
+        <div class="popup"></div>
         <div class="container">
             <div class="row">
-                    <h2 class="seven columns">Bienvenido ${username}</h2>
+                <h2 class="twelve columns">Bienvenido <%= userName%></h2>
             </div>
             <div class="row">
                 <div class="six columns">
                     <h3 class="twelve columns">Cajas Disponibles</h3>
                     <table class="twelve columns">
                         <thead>
-                            <tr>
-                                <td>Disponibles</td>
-                                <td>Activas</td>
-                            </tr>
+                        <tr>
+                            <td>Disponibles</td>
+                            <td>Activas</td>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>15</td>
-                                <td>8</td>
-                            </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>8</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -64,18 +74,18 @@
                     <h3 class="twelve columns">Usuarios</h3>
                     <table class="tweleve columns">
                         <thead>
-                            <tr>
-                                <td>Nombre</td>
-                                <td>Login</td>
-                                <td>Status</td>
-                            </tr>
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Login</td>
+                            <td>Status</td>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Daniel Espinoza</td>
-                                <td>dnylpz</td>
-                                <td>Activo en Consola</td>
-                            </tr>
+                        <tr>
+                            <td>Daniel Espinoza</td>
+                            <td>dnylpz</td>
+                            <td>Activo en Consola</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -93,7 +103,8 @@
         </div>
     </div>
 </div>
-</body>
 <script src="js/jQuery.js" type="text/javascript"></script>
 <script src="js/admon.js" type="text/javascript"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js" type="text/javascript"></script>
+</body>
 </html>

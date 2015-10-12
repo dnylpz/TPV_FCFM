@@ -3,19 +3,19 @@ package com.fcfm.tienda.services;
 import com.fcfm.tienda.models.Usuario;
 import com.fcfm.tienda.utils.ByteOperations;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
+
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-
+import java.util.Date;
 /**
  * Created by jose.espinoza.lopez on 8/26/2015.
  */
 public class UsuarioProvider {
     public static Usuario getUsuario(String username, String password){
-       Usuario session = null;
+        Usuario ses= null;
         byte[] md5Result = null;
         String passHex = null;
         try {
@@ -40,16 +40,18 @@ public class UsuarioProvider {
             stmt.setString(1,username);
             rs = stmt.executeQuery();
             while(rs.next()){
-                System.out.println( rs.getString(3));
                 if(rs.getString(3).equals(passHex)){
-                    session = new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),
-                            rs.getBoolean(4),rs.getString(5),rs.getString(6));
-                    return session;
+                    ses = new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),
+                            rs.getString("passwordUsuario"),rs.getDate("ultimoAccesoUsuario"),
+                            rs.getBytes("fotoUsuario"), rs.getBoolean("administrador"),
+                            rs.getString("nombreUsuario"), rs.getString("apellidosUsuario"));
+                    return ses;
                 }
             }
+
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return session;
+        return ses;
     }
 }
