@@ -14,12 +14,12 @@
     <h1 class="twelve columns head">Agregar un usuario</h1>
   </div>
   <div class="row">
-    <form action="/addUser" method="POST" id="addUser" class="twelve columns" enctype="multipart/form-data">
+    <form action="serveusers" method="POST" id="addUser" class="twelve columns" enctype="multipart/form-data">
       <div class="row">
         <label class="three columns">Nombre*</label>
         <input type="text" name="nombre" class="three columns" required/>
         <label class="three columns">Apellidos*</label>
-        <input type="text" name="Apellidos" class="three columns" required/>
+        <input type="text" name="apellido" class="three columns" required/>
       </div>
       <div class="row">
         <label class="three columns ">Login de usuario* </label>

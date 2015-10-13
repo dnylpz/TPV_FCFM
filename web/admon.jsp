@@ -104,7 +104,7 @@
     </div>
 </div>
 <script src="js/jQuery.js" type="text/javascript"></script>
-<script src="js/admon.js" type="text/javascript"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js" type="text/javascript"></script>
+<script src="js/admon.js" type="text/javascript"></script>
 </body>
 </html>

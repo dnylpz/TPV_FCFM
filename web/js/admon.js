@@ -35,8 +35,9 @@ function callPopup(event){
                 });
                 $('form').on('submit',function(event){
                     event.preventDefault();
+                    console.log("i did submit");
                     var id = $('form').attr('id');
-                    $(id).validate({
+                    $('#'+id).validate({
                         submitHandler:function(form){
                             form.submit();
                         }

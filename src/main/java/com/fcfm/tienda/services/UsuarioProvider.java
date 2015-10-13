@@ -54,4 +54,8 @@ public class UsuarioProvider {
         }
         return ses;
     }
+    public static boolean saveUsuario(Usuario sav){
+
+        return true;
+    }
 }

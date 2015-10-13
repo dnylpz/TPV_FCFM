@@ -14,5 +14,4 @@ import java.sql.Connection;
  * Created by jose.espinoza.lopez on 8/25/2015.
  */
 public class UsuarioController {
-
 }
