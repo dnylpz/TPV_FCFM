@@ -26,18 +26,7 @@ public class UsersServlet extends HttpServlet {
         String name = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String password = request.getParameter("password");
-        Part foto = request.getPart("fotoUsuario");
-        InputStream fileContent = foto.getInputStream();
-        byte[] fotoBytes = IOUtils.readFully(fileContent,-1,true);
-        String isAdmin = request.getParameter("isAdmin");
-        System.out.println(username);
-        System.out.println(name);
-        System.out.println(apellido);
-        System.out.println(password);
-        System.out.println(isAdmin);
-        System.out.println(fotoBytes.toString());
-
-
+        //request.getParameter("fotoUsuario");
         //if(username != null){
          //   Usuario us = new Usuario()
        // }
