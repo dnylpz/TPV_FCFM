@@ -17,13 +17,14 @@ public class AdmonAjaxServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String to =  request.getParameter("to");
         System.out.println(to);
-        if(to.equals("users")){
-            request.getRequestDispatcher("templates/admin/users.jsp").forward(request,response);
+        if(to.equals("editUser")){
+            request.setAttribute("searchFor","Usuario");
+            request.getRequestDispatcher("templates/admin/search.jsp").forward(request,response);
         }
         if( to.equals("home")){
             request.getRequestDispatcher("templates/admin/home.jsp").forward(request,response);
         }
-        if( to.equals("adduser")){
+        if( to.equals("addUser")){
             request.getRequestDispatcher("templates/admin/addUser.jsp").forward(request,response);
         }
 

@@ -4,6 +4,6 @@
 
 $(document).ready(function(){
     if($("#isPasswordWrong").val() === "true"){
-        alert("El password es incorrecto");
+        alert("El usuario o password es incorrecto");
     }
 })

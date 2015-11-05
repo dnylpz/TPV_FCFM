@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Usuario user = (Usuario) session.getAttribute("user");
 String userName = user.getNombreUsuario() + " " + user.getApellidoUsuario();%>
-<div class="container">
+<div class="container body-content">
   <div class="row">
     <h2 class="twelve columns">Bienvenido <%= userName%></h2>
   </div>

@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <% Usuario user = (Usuario)session.getAttribute("user");
         String userName = user.getNombreUsuario() + " " +  user.getApellidoUsuario();
+        int idFoto = user.getFotoUsuario().getIdImagen();
     %>
 </head>
 <body>
@@ -59,7 +60,7 @@
                 </div>
                 <div class="row">
                     <div class="two columns">
-                        <img  class="circle" heigh="150px" width="150px" src="img/profile_placeholder.jpg" alt="foto"/>
+                        <img  class="circle" heigh="150px" width="150px" src="${pageContext.request.contextPath}/imagen?id=<%=idFoto%>" />
                     </div>
                 </div>
                 <div class="row">

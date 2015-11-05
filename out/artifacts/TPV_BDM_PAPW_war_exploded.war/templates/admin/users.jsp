@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="popup"></div>
-<div class="container">
+<div class="container body-content">
   <div class="row">
     <div class="six columns">
       <h1 class="twelve columns">Usuarios Activos</h1>
@@ -21,7 +21,7 @@
         </tbody>
       </table>
     </div>
-    <div class="six columns">
+    <div class="six columns butt-cont">
       <a href="#" id="popup" class="button"><p>Agregar Usuario</p></a>
     </div>
   </div>

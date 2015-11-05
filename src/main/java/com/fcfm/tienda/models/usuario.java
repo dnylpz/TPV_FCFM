@@ -11,19 +11,36 @@ public class Usuario {
     private String loginUsuario;
     private String passwordUsuario;
     private Date ultimoAccesoUsuario;
-    private byte[] imagenUsuario;
+    private Imagen fotoUsuario;
     private boolean administrador;
     private String nombreUsuario;
     private String apellidoUsuario;
-    public Usuario(int idUsuario, String loginUsuario, String passwordUsuario, Date ultimoAccesoUsuario, byte[] imagenUsuario, boolean administrador, String nombreUsuario, String apellidoUsuario) {
+
+    public Usuario(int idUsuario, String loginUsuario, String passwordUsuario, Date ultimoAccesoUsuario, Imagen fotoUsuario, boolean administrador, String nombreUsuario, String apellidoUsuario) {
         this.idUsuario = idUsuario;
         this.loginUsuario = loginUsuario;
         this.passwordUsuario = passwordUsuario;
         this.ultimoAccesoUsuario = ultimoAccesoUsuario;
-        this.imagenUsuario = imagenUsuario;
+        this.fotoUsuario = fotoUsuario;
         this.administrador = administrador;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
+    }
+
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
+    }
+
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public int getIdUsuario() {
@@ -58,12 +75,12 @@ public class Usuario {
         this.ultimoAccesoUsuario = ultimoAccesoUsuario;
     }
 
-    public byte[] getImagenUsuario() {
-        return imagenUsuario;
+    public Imagen getFotoUsuario() {
+        return fotoUsuario;
     }
 
-    public void setImagenUsuario(byte[] imagenUsuario) {
-        this.imagenUsuario = imagenUsuario;
+    public void setFotoUsuario(Imagen fotoUsuario) {
+        this.fotoUsuario = fotoUsuario;
     }
 
     public boolean isAdministrador() {
@@ -72,21 +89,5 @@ public class Usuario {
 
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getApellidoUsuario() {
-        return apellidoUsuario;
-    }
-
-    public void setApellidoUsuario(String apellidoUsuario) {
-        this.apellidoUsuario = apellidoUsuario;
     }
 }

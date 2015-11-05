@@ -103,6 +103,19 @@
 .footer-content{
     padding:1.5em;
 }
-.footer a{
-    color:white;
+.footer a {
+    color: white;
+}
+.body-content{
+    padding-top:3em;
+}
+
+#addusr{
+
+}
+.butt-cont{
+    padding-left:25%;
+    padding-right:25%;
+    margin:0;
+
 }
