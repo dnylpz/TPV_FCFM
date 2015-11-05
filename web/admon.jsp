@@ -22,65 +22,67 @@
     %>
 </head>
 <body>
-<div class="wrapper">
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="five columns">
-                    <h1>Administración</h1>
+    <div class="wrapper">
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="five columns">
+                        <h1>Administración</h1>
+                    </div>
+                    <div class="five columns">
+                        <nav class="navigation">
+                            <ul>
+                                <li><a href="#" id="home">Home</a></li>
+                                <li><a href="#" id="users">Usuarios</a></li>
+                                <li><a href="#">Cajas</a></li>
+                                <li><a href="#">Reportes</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="two colums" >
+                        <a href="venta.jsp" class="button"><p>ir a venta</p></a>
+                        <a class="button" href="index.jsp"><p>Salir</p></a>
+                    </div>
                 </div>
-                <div class="five columns">
-                    <nav class="navigation">
-                        <ul>
-                            <li><a href="#" id="home">Home</a></li>
-                            <li><a href="#" id="users">Usuarios</a></li>
-                            <li><a href="#">Cajas</a></li>
-                            <li><a href="#">Reportes</a></li>
-                        </ul>
-                    </nav>
+            </div>
+        </div>
+        <div class="popup"></div>
+        <div class="content">
+            <div class="container body-content">
+                <div class="row">
+                    <h2 class="twelve columns">Bienvenido <%= userName%></h2>
                 </div>
-                <div class="two colums" >
-                    <a href="venta.jsp" class="button"><p>ir a venta</p></a>
-                    <a class="button" href="index.jsp"><p>Salir</p></a>
+                <div class="row">
+                  <div class="six columns">
+                    <h3>Usuarios</h3>
+                    <a href="#" class="button ajx-btn" id="addUser">Agregar Usuario</a>
+                    <a href="#" class="button ajx-btn" id="editUser">Editar Usuario</a>
+                  </div>
+                  <div class="six columns">
+                    <h3>Productos</h3>
+                    <a href="#" class="button ajx-btn" id="addProduct">Agregar Producto</a>
+                    <a href="#" class="button ajx-btn" id="editProduct">Editar Producto</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="six columns">
+                    <h3>Cajas</h3>
+                      <a href="#" class="button ajx-btn" id="editCashier">Editar Caja</a>
+                  </div>
+                  <div class="six columns">
+                    <h3>Reportes</h3>
+                      <a href="#" class="button ajx-btn" id="hourlyReport">Reporte de Hora</a>
+                      <a href="#" class="button ajx-btn" id="shiftReport">Reporte de Turno</a>
+                      <a href="#" class="button ajx-btn" id="dailyReport">Reporte de Dia</a>
+                      <a href="#" class="button ajx-btn " id="weekleReport">Reporte de Semana</a>
+                  </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="popup"></div>
-    <div class="content">
-        <div class="container body-content">
-            <div class="row">
-                <h2 class="twelve columns">Bienvenido <%= userName%></h2>
-            </div>
-            <div class="row">
-              <div class="six columns">
-                <h3>Usuarios</h3>
-                <a href="#" class="button ajx-btn" id="addUser">Agregar Usuario</a>
-                <a href="#" class="button ajx-btn" id="editUser">Editar Usuario</a>
-              </div>
-              <div class="six columns">
-                <h3>Productos</h3>
-                <a href="#" class="button ajx-btn" id="addProduct">Agregar Producto</a>
-                <a href="#" class="button ajx-btn" id="editProduct">Editar Producto</a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="six columns">
-                <h3>Cajas</h3>
-                  <a href="#" class="button ajx-btn" id="editCashier">Editar Caja</a>
-              </div>
-              <div class="six columns">
-                <h3>Reportes</h3>
-                  <a href="#" class="button ajx-btn" id="hourlyReport">Reporte de Hora</a>
-                  <a href="#" class="button ajx-btn" id="shiftReport">Reporte de Turno</a>
-                  <a href="#" class="button ajx-btn" id="dailyReport">Reporte de Dia</a>
-                  <a href="#" class="button ajx-btn " id="weekleReport">Reporte de Semana</a>
-              </div>
-            </div>
-        </div>
-</div>
-<script src="js/jQuery.js" type="text/javascript"></script>
-<script src="js/jquery.validate.js" type="text/javascript"></script>
-<script src="js/admon.js" type="text/javascript"></script>
+    <script src="js/jQuery.js" type="text/javascript"></script>
+    <script src="js/jquery.validate.js" type="text/javascript"></script>
+    <script src="js/admon.js" type="text/javascript"></script>
+    <script src="js/search.js" type="text/javascript"></script>
 </body>
 </html>

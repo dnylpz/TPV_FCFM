@@ -5,6 +5,8 @@ import com.fcfm.tienda.models.Usuario;
 import com.fcfm.tienda.utils.Utils;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jose.espinoza.lopez on 8/26/2015.
@@ -48,7 +50,6 @@ public class UsuarioServices {
         return ses;
     }
     public static boolean saveUsuario(String user, String name, String apel, String pass,Imagen img, Boolean isAdm ){
-
         String hash = Utils.hashPassword(pass);
         MysqlDataSource ds = ConnectionFactory.getDataSource();
         Connection conn = null;
@@ -79,5 +80,29 @@ public class UsuarioServices {
             e.printStackTrace();
         }
         return false;
+    }
+    public static List<Usuario> searchUsuarios(String param){
+        List<Usuario> result = new ArrayList<Usuario>();
+        MysqlDataSource ds = ConnectionFactory.getDataSource();
+        Connection con;
+        PreparedStatement stmt;
+        ResultSet rs;
+        try{
+            con = ds.getConnection();
+            stmt = con.prepareStatement("CALL searchforusers(?)");
+            stmt.setString(1,param);
+            rs = stmt.executeQuery();
+            int i =0;
+            while(rs.next()){
+                Imagen usrImg = ImagenServices.getImagen(rs.getInt("fotoUsuario"));
+                 result.add(new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
+                         rs.getDate("ultimoAccesoUsuario"),usrImg,rs.getBoolean("administrador"),
+                         rs.getString("nombreUsuario"),rs.getString("apellidosUsuario")));
+                i++;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 }

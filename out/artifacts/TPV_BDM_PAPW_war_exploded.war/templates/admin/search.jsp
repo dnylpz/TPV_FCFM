@@ -16,9 +16,9 @@
   <h2>Busca ${searchFor} a editar.</h2>
 </div>
 <div class="row">
-  <form action="searchServlet" method="POST" id="${searchFor}" class="twelve columns">
-    <input type="text" name="searchParam" />
+  <form method="POST" id="search" searchFor="${searchFor}" class="twelve columns">
+    <input type="text" name="searchParam" id="searchParam"/>
     <input type="submit" value="buscar" />
   </form>
 </div>
-<script src="search.js" type="text/javascript" />
+<div class="userList row"></div>
