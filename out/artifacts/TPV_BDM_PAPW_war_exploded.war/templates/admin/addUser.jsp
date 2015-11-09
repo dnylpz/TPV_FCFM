@@ -11,30 +11,32 @@
 </div>
 <div class="container">
   <div class="row">
-    <h1 class="twelve columns head">Agregar un usuario</h1>
+    <h1 class="twelve columns head">${action}  usuario</h1>
   </div>
   <div class="row">
     <form action="serveusers" method="POST" id="addUser" class="twelve columns" enctype="multipart/form-data">
       <div class="row">
         <label class="three columns">Nombre*</label>
-        <input type="text" name="nombre" class="three columns" required/>
+        <input type="text" name="nombre" class="three columns" required value="${usuario.getNombreUsuario()}"/>
         <label class="three columns">Apellidos*</label>
-        <input type="text" name="apellido" class="three columns" required/>
+        <input type="text" name="apellido" class="three columns" required value="${usuario.getApellidoUsuario()}"/>
       </div>
       <div class="row">
         <label class="three columns ">Login de usuario* </label>
-        <input type="text" name="username" class="three columns" required/>
+        <input type="text" name="username" class="three columns" required value="${usuario.getLoginUsuario()}"/>
         <label class="three columns ">Password*</label>
-        <input type="password" name="password" class="three columns" required/>
+        <input type="password" name="password" class="three columns" required value="${usuario.getPasswordUsuario()}"/>
       </div>
       <div class="row">
         <label class="two columns ">Foto</label>
         <input type="file" name="fotoUsuario" class="four columns"/>
         <label class="three columns">Es Administrador</label>
-        <input type="checkbox" name="isAdmin" value="true"/>
+        <input type="checkbox" name="isAdmin" value="true" />
+        <input type="hidden" name="servicio" value="${action}"/>
+        <input type="hidden" name="idUser" value="${usuario.getIdUsuario()}" />
       </div>
       <div class="row">
-        <input type="submit" class="button three columns offset-by-four" value="Agregar"/>
+        <input type="submit" class="button three columns offset-by-four" value="${action}"/>
       </div>
     </form>
   </div>

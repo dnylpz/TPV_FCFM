@@ -8,7 +8,8 @@ $(document).ready(function(){
         $.post("adminajax",{to: $(this).attr('id')},function(response){
             $('.content').addClass('inactive');
             $(".popup").html(response);
-            $("#cerrar").on('click',function(event){
+            $(".popup").on('click','#cerrar',function(event){
+                console.log("clicked!");
                 $(".popup").children().remove();
                 $(".content").removeClass('inactive');
             });

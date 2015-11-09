@@ -14,7 +14,6 @@ import java.util.List;
 public class UsuarioServices {
     public static Usuario getUsuario(String username, String password){
         Usuario ses= null;
-        byte[] md5Result = null;
         String passHex = null;
         passHex = Utils.hashPassword(password);
         MysqlDataSource ds = ConnectionFactory.getDataSource();
@@ -49,7 +48,7 @@ public class UsuarioServices {
         }
         return ses;
     }
-    public static boolean saveUsuario(String user, String name, String apel, String pass,Imagen img, Boolean isAdm ){
+    public static boolean agregarUsuario(String user, String name, String apel, String pass, Imagen img, Boolean isAdm){
         String hash = Utils.hashPassword(pass);
         MysqlDataSource ds = ConnectionFactory.getDataSource();
         Connection conn = null;
@@ -100,9 +99,89 @@ public class UsuarioServices {
                          rs.getString("nombreUsuario"),rs.getString("apellidosUsuario")));
                 i++;
             }
+            rs.close();
+            stmt.close();
+            con.close();
         }catch(Exception e){
             e.printStackTrace();
         }
         return result;
+    }
+    public static Usuario getUsuarioById(int id){
+        Usuario result = null;
+        MysqlDataSource ds = ConnectionFactory.getDataSource();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try{
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement("CALL getusuariobyid(?)");
+            stmt.setInt(1,id);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Imagen usrimg = ImagenServices.getImagen(rs.getInt("fotoUsuario"));
+                result = new Usuario(id,rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
+                        rs.getDate("ultimoAccesoUsuario"),usrimg,rs.getBoolean("administrador"),
+                        rs.getString("nombreUsuario"),rs.getString("apellidosUsuario"));
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean updateUsuario(int idUser, String user, String name, String apel, String pass, Imagen img, Boolean isAdm){
+        Usuario ant = getUsuarioById(idUser);
+        Usuario act = new Usuario(idUser,user,pass,null,img,isAdm,name,apel);
+        String pswd = null;
+        if(act.equals(ant)){
+            return true;
+        }else{
+            MysqlDataSource ds = ConnectionFactory.getDataSource();
+            if(!act.getPasswordUsuario().equals(ant.getPasswordUsuario())) {
+               pswd  = Utils.hashPassword(act.getPasswordUsuario());
+            }else{
+                pswd = act.getPasswordUsuario();
+            }
+            try {
+                Connection conn = ds.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("call updateusuario(?,?,?,?,?,?,?)");
+                stmt.setInt(1,act.getIdUsuario());
+                stmt.setString(2,act.getLoginUsuario());
+                stmt.setString(3,act.getNombreUsuario());
+                stmt.setString(4,act.getApellidoUsuario());
+                stmt.setString(5,pswd);
+                if(act.getFotoUsuario() != null){
+                    stmt.setInt(6,act.getFotoUsuario().getIdImagen());
+                } else{
+                    stmt.setInt(6, ant.getFotoUsuario().getIdImagen());
+                }
+                stmt.setBoolean(7,act.isAdministrador());
+                stmt.execute();
+                stmt.close();
+                conn.close();
+                return true;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+        }
+        return false;
+    }
+    public static boolean deleteUsuario(int idUser){
+        MysqlDataSource ds = ConnectionFactory.getDataSource();
+        try{
+            Connection conn = ds.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("CALL deleteuser(?)");
+            stmt.setInt(1,idUser);
+            stmt.execute();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 }

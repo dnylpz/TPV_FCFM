@@ -9,15 +9,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="content twelve columns">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<div class="content six columns offset-by-three">
   <table>
     <thead>
     <tr>
       <th>Nombre</th>
       <th>Apellido</th>
       <th>Login</th>
-      <th>Ultimo Acceso</th>
-      <th>editar</th>
+      <th>Editar</th>
+      <th>Borrar</th>
     </tr>
     </thead>
     <tbody>
@@ -26,8 +27,8 @@
             <td>${x.getNombreUsuario()}</td>
             <td>${x.getApellidoUsuario()}</td>
             <td>${x.getLoginUsuario()}</td>
-            <td>${x.getUltimoAccesoUsuario().toString()}</td>
-            <td><a href="#" class="button">Editar</a></td>
+            <td><a href="#" class="button edit" userId="${x.getIdUsuario()}">Editar</a></td>
+            <td><a href="#" class="button delete" style="background-color:red; color:white;"  userId="${x.getIdUsuario()}">Borrar</a></td>
         </tr>
     </c:forEach>
     </tbody>

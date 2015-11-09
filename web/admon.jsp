@@ -29,16 +29,6 @@
                     <div class="five columns">
                         <h1>Administración</h1>
                     </div>
-                    <div class="five columns">
-                        <nav class="navigation">
-                            <ul>
-                                <li><a href="#" id="home">Home</a></li>
-                                <li><a href="#" id="users">Usuarios</a></li>
-                                <li><a href="#">Cajas</a></li>
-                                <li><a href="#">Reportes</a></li>
-                            </ul>
-                        </nav>
-                    </div>
                     <div class="two colums" >
                         <a href="venta.jsp" class="button"><p>ir a venta</p></a>
                         <a class="button" href="index.jsp"><p>Salir</p></a>

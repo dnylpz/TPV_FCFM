@@ -1,5 +1,7 @@
 package com.fcfm.tienda.servlets;
 
+import com.fcfm.tienda.services.UsuarioServices;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +27,18 @@ public class AdmonAjaxServlet extends HttpServlet {
             request.getRequestDispatcher("templates/admin/home.jsp").forward(request,response);
         }
         if( to.equals("addUser")){
+            request.setAttribute("action","Agregar");
             request.getRequestDispatcher("templates/admin/addUser.jsp").forward(request,response);
+        }
+        if(to.equals("doEditUser")){
+            request.setAttribute("action","Editar");
+            request.setAttribute("usuario", UsuarioServices.getUsuarioById(Integer.parseInt(request.getParameter("userid"))));
+            request.getRequestDispatcher("templates/admin/addUser.jsp").forward(request,response);
+        }
+        if(to.equals("addProduct")){
+            System.out.println("clicked add product");
+            request.setAttribute("action","Agregar");
+            request.getRequestDispatcher("templates/admin/addProduct.jsp").forward(request,response);
         }
 
     }

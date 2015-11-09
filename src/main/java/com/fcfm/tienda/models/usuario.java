@@ -16,7 +16,8 @@ public class Usuario {
     private String nombreUsuario;
     private String apellidoUsuario;
 
-    public Usuario(int idUsuario, String loginUsuario, String passwordUsuario, Date ultimoAccesoUsuario, Imagen fotoUsuario, boolean administrador, String nombreUsuario, String apellidoUsuario) {
+    public Usuario(int idUsuario, String loginUsuario, String passwordUsuario, Date ultimoAccesoUsuario,
+                   Imagen fotoUsuario, boolean administrador, String nombreUsuario, String apellidoUsuario) {
         this.idUsuario = idUsuario;
         this.loginUsuario = loginUsuario;
         this.passwordUsuario = passwordUsuario;
@@ -85,6 +86,35 @@ public class Usuario {
 
     public boolean isAdministrador() {
         return administrador;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+
+        Usuario usuario = (Usuario) o;
+
+        if (isAdministrador() != usuario.isAdministrador()) return false;
+        if (!getLoginUsuario().equals(usuario.getLoginUsuario())) return false;
+        if (!getPasswordUsuario().equals(usuario.getPasswordUsuario())) return false;
+        if (getUltimoAccesoUsuario() != null ? !getUltimoAccesoUsuario().equals(usuario.getUltimoAccesoUsuario()) : usuario.getUltimoAccesoUsuario() != null)
+            return false;
+        if (getNombreUsuario() != null ? !getNombreUsuario().equals(usuario.getNombreUsuario()) : usuario.getNombreUsuario() != null)
+            return false;
+        return !(getApellidoUsuario() != null ? !getApellidoUsuario().equals(usuario.getApellidoUsuario()) : usuario.getApellidoUsuario() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getLoginUsuario().hashCode();
+        result = 31 * result + getPasswordUsuario().hashCode();
+        result = 31 * result + (getUltimoAccesoUsuario() != null ? getUltimoAccesoUsuario().hashCode() : 0);
+        result = 31 * result + (isAdministrador() ? 1 : 0);
+        result = 31 * result + (getNombreUsuario() != null ? getNombreUsuario().hashCode() : 0);
+        result = 31 * result + (getApellidoUsuario() != null ? getApellidoUsuario().hashCode() : 0);
+        return result;
     }
 
     public void setAdministrador(boolean administrador) {

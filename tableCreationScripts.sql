@@ -51,7 +51,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `TPV_FCFM`.`Productos` (
   `idProductos` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `nombreProducto` VARCHAR(45) NOT NULL COMMENT '',
-  `descripcionProducto` VARCHAR(250) NULL COMMENT '',
+  `descripcion` VARCHAR(250) NULL COMMENT '',
   `UPC` INT NULL COMMENT '',
   `imagenProducto` BLOB NULL COMMENT '',
   `precioProducto` DECIMAL(6,2) NULL COMMENT '',

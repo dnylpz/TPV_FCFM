@@ -20,5 +20,5 @@
     <input type="text" name="searchParam" id="searchParam"/>
     <input type="submit" value="buscar" />
   </form>
+  <div class="userList row"></div>
 </div>
-<div class="userList row"></div>

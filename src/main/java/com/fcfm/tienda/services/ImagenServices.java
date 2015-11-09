@@ -3,6 +3,10 @@ package com.fcfm.tienda.services;
 import com.fcfm.tienda.models.Imagen;
 import com.fcfm.tienda.utils.Utils;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.InputStream;
 import java.sql.*;
 
 import java.sql.SQLException;
@@ -59,5 +63,41 @@ public class ImagenServices {
             }
         }
         return foto;
+    }
+    public static Imagen parseImage(Part imagePart){
+        byte[] foto;
+
+        String fileName = getFileName(imagePart);
+        String fileType = imagePart.getContentType();
+
+        if(!fileName.equals("")){
+            if(fileType.contains("image")){
+                try {
+                    InputStream is = imagePart.getInputStream();
+                    int read = 0;
+                    foto = new byte[1024];
+                    while ((read = is.read(foto)) != -1){
+                        System.out.println(read);
+                    }
+                    Blob img  = new SerialBlob(foto);
+                    return imagenProvider(img,fileName,fileType);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            return null;
+        }
+        return null;
+    }
+    private static String getFileName(final Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(
+                        content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
     }
 }
