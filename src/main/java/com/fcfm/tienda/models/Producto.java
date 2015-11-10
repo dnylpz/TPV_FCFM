@@ -9,15 +9,45 @@ public class Producto {
     private String descripcion;
     private long UPC;
     private Imagen imagen;
-    private float precio;
+    private double  precio;
+    private int existencia;
 
-    public Producto(int idProducto, String nombre, String descripcion, long UPC, Imagen imagen, float precio) {
+    public Producto(int idProducto, String nombre, String descripcion, long UPC, Imagen imagen, double precio, int existencia) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.UPC = UPC;
         this.imagen = imagen;
         this.precio = precio;
+        this.existencia = existencia;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Producto)) return false;
+
+        Producto producto = (Producto) o;
+
+        if (getUPC() != producto.getUPC()) return false;
+        if (Double.compare(producto.getPrecio(), getPrecio()) != 0) return false;
+        if (getExistencia() != producto.getExistencia()) return false;
+        if (!getNombre().equals(producto.getNombre())) return false;
+        return !(getDescripcion() != null ? !getDescripcion().equals(producto.getDescripcion()) : producto.getDescripcion() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getNombre().hashCode();
+        result = 31 * result + (getDescripcion() != null ? getDescripcion().hashCode() : 0);
+        result = 31 * result + (int) (getUPC() ^ (getUPC() >>> 32));
+        temp = Double.doubleToLongBits(getPrecio());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + getExistencia();
+        return result;
     }
 
     public int getIdProducto() {
@@ -60,11 +90,19 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public int getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(int existencia) {
+        this.existencia = existencia;
     }
 }

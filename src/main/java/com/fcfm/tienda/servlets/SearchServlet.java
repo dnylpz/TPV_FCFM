@@ -1,6 +1,8 @@
 package com.fcfm.tienda.servlets;
 
+import com.fcfm.tienda.models.Producto;
 import com.fcfm.tienda.models.Usuario;
+import com.fcfm.tienda.services.ProductoServicios;
 import com.fcfm.tienda.services.UsuarioServices;
 
 import javax.servlet.ServletException;
@@ -18,11 +20,21 @@ import java.util.List;
             urlPatterns = "/search")
 public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("in the search post");
+        String searchFor= request.getParameter("searchFor");
         String param = request.getParameter("searchParam");
-        List<Usuario> resultado = UsuarioServices.searchUsuarios(param);
-        request.setAttribute("usuarios", resultado);
-        request.getRequestDispatcher("templates/search/userlist.jsp").forward(request,response);
+        if(searchFor.equals("Usuario")) {
+            List<Usuario> resultado;
+            resultado = UsuarioServices.searchUsuarios(param);
+            request.setAttribute("resultado", resultado);
+            request.getRequestDispatcher("templates/search/userlist.jsp").forward(request, response);
+        }
+        if(searchFor.equals("Producto")){
+            List<Producto> resultado;
+            resultado = ProductoServicios.buscaProducto(param);
+            request.setAttribute("resultado", resultado);
+            request.getRequestDispatcher("templates/search/productlist.jsp").forward(request,response);
+        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

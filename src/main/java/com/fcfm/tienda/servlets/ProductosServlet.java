@@ -21,20 +21,35 @@ import java.io.IOException;
 @MultipartConfig
 public class ProductosServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nombre;
-        String descripcion;
-        long UPC;
-        Part imagen;
-        float precio;
-        Imagen prImg;
+        String servicio = request.getParameter("servicio");
 
-        nombre = request.getParameter("nombre");
-        descripcion = request.getParameter("descripcion");
-        UPC = Long.parseLong(request.getParameter("upc"));
-        imagen = request.getPart("imagen");
-        precio = Float.parseFloat(request.getParameter("precio"));
-        prImg = ImagenServices.parseImage(imagen);
-        ProductoServicios.agregarProducto(nombre,descripcion,UPC,prImg,precio);
+        if(servicio.equals("borrar")){
+            int idProducto = Integer.parseInt(request.getParameter("itemId"));
+            ProductoServicios.deleteProducto(idProducto);
+        }else {
+            String nombre;
+            String descripcion;
+            long UPC;
+            Part imagen;
+            double precio;
+            Imagen prImg;
+            int existencia;
+
+            nombre = request.getParameter("nombre");
+            descripcion = request.getParameter("descripcion");
+            UPC = Long.parseLong(request.getParameter("upc"));
+            imagen = request.getPart("imagen");
+            precio = Double.parseDouble(request.getParameter("precio"));
+            existencia = Integer.parseInt(request.getParameter("existencia"));
+            prImg = ImagenServices.parseImage(imagen);
+            if (servicio.equals("editar")) {
+                int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+                ProductoServicios.updateProducto(idProducto, nombre, descripcion,
+                        UPC, prImg, precio, existencia);
+            } else {
+                ProductoServicios.agregarProducto(nombre, descripcion, UPC, prImg, precio, existencia);
+            }
+        }
         request.getRequestDispatcher("/admon.jsp").forward(request,response);
     }
 

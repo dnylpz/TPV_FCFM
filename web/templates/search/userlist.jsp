@@ -10,6 +10,10 @@
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 <div class="content six columns offset-by-three">
   <table>
     <thead>
@@ -22,13 +26,13 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="x" items="${usuarios}">
+    <c:forEach var="x" items="${resultado}">
         <tr>
             <td>${x.getNombreUsuario()}</td>
             <td>${x.getApellidoUsuario()}</td>
             <td>${x.getLoginUsuario()}</td>
-            <td><a href="#" class="button edit" userId="${x.getIdUsuario()}">Editar</a></td>
-            <td><a href="#" class="button delete" style="background-color:red; color:white;"  userId="${x.getIdUsuario()}">Borrar</a></td>
+            <td><a href="#" class="button edit" action="adminajax" servicio="doEditUser" itemId="${x.getIdUsuario()}">Editar</a></td>
+            <td><a href="#" class="button delete" action="serveusers" itemType="Usuario" style="background-color:red; color:white;"  itemId="${x.getIdUsuario()}">Borrar</a></td>
         </tr>
     </c:forEach>
     </tbody>

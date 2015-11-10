@@ -28,7 +28,7 @@ public class UsersServlet extends HttpServlet {
         //locals
         Imagen usrImg;
         if(request.getParameter("servicio").equals("borrar")){
-            UsuarioServices.deleteUsuario(Integer.parseInt(request.getParameter("usrId")));
+            UsuarioServices.deleteUsuario(Integer.parseInt(request.getParameter("itemId")));
         }else {
             //parameters
             int idUser = Integer.parseInt(request.getParameter("idUser"));
@@ -43,9 +43,7 @@ public class UsersServlet extends HttpServlet {
 
             Part fotoPart = request.getPart("fotoUsuario");
 
-
-            usrImg = ImagenServices.parseImage(fotoPart);
-            //BLOB BUIlD
+            usrImg = ImagenServices.parseImage(fotoPart); //generates BLOB, construct and save an image
 
             if (request.getParameter("servicio").equals("Editar")) {
                 if (UsuarioServices.updateUsuario(idUser, username, nombre, apellido, password, usrImg, admin)) {

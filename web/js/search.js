@@ -4,18 +4,22 @@
 $(document).ready(function(){
     $(".popup").on("submit","#search",function(e){
         e.preventDefault();
-        console.log($("#search").attr('searchFor'));
+        var buscaA  =$("#search").attr('searchFor')
+        console.log(buscaA);
         console.log($("#searchParam").val());
-        $.post('search',{searchParam:$("#searchParam").val()},function(response){
+        $.post('search',{searchParam:$("#searchParam").val(), searchFor:buscaA},function(response){
             console.log(response);
-            $(".userList").html(response);
+            $(".resultList").children().remove();
+            $(".resultList").html(response);
         });
         return false;
     });
     $(".popup").on('click',".edit",function(e){
         e.preventDefault();
-        console.log("you clicked the edit button with id: "+$(this).attr("userId"));
-        $.post('adminajax',{userid:$(this).attr("userId"), to:'doEditUser'},function(response){
+        console.log("you clicked the edit button with id: "+$(this).attr("itemId"));
+        var action = $(this).attr("action");
+        var serv = $(this).attr("servicio");
+        $.post(action,{itemId:$(this).attr("itemId"), to:serv},function(response){
             console.log(response);
             $(".popup").children().remove();
             $(".popup").html(response);
@@ -23,11 +27,17 @@ $(document).ready(function(){
     });
     $(".popup").on("click",".delete",function(e){
         e.preventDefault();
-        console.log("you clicked the delete button with id: "+$(this).attr("userId"));
-        $.post('serveusers',{servicio:"borrar", usrId:$(this).attr('userId')},function(reponse){
-            alert("Usuario Eliminado!");
-            $(".popup").children().remove();
-            $(".content").removeClass("inactive");
-        });
+        var cnfrm = confirm("¿Desea eliminar este elemento?");
+        if(cnfrm) {
+            var action = $(this).attr("action");
+            var itemType = $(this).attr("itemType");
+            console.log("you clicked the delete button with id: " + $(this).attr("itemId"));
+            var itId = $(this).attr("itemId");
+            $.post(action, {itemId: itId, servicio: "borrar"}, function (reponse) {
+                alert(itemType + " Eliminado!");
+                $(".popup").children().remove();
+                $(".content").removeClass("inactive");
+            });
+        }
     });
 });

@@ -97,9 +97,7 @@ public class Usuario {
 
         if (isAdministrador() != usuario.isAdministrador()) return false;
         if (!getLoginUsuario().equals(usuario.getLoginUsuario())) return false;
-        if (!getPasswordUsuario().equals(usuario.getPasswordUsuario())) return false;
-        if (getUltimoAccesoUsuario() != null ? !getUltimoAccesoUsuario().equals(usuario.getUltimoAccesoUsuario()) : usuario.getUltimoAccesoUsuario() != null)
-            return false;
+        if (!getPasswordUsuario().equals(usuario.getPasswordUsuario())) return false;;
         if (getNombreUsuario() != null ? !getNombreUsuario().equals(usuario.getNombreUsuario()) : usuario.getNombreUsuario() != null)
             return false;
         return !(getApellidoUsuario() != null ? !getApellidoUsuario().equals(usuario.getApellidoUsuario()) : usuario.getApellidoUsuario() != null);

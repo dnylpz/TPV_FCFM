@@ -13,12 +13,16 @@
   <a href="#" id="cerrar" >X</a>
 </div>
 <div class="title">
-  <h2>Busca ${searchFor} a editar.</h2>
+  <h2>
+    Busca ${searchFor} <%if(!request.getAttribute("action").equals("")){%>
+    a ${action}
+    <%}%>
+  </h2>
 </div>
 <div class="row">
   <form method="POST" id="search" searchFor="${searchFor}" class="twelve columns">
     <input type="text" name="searchParam" id="searchParam"/>
     <input type="submit" value="buscar" />
   </form>
-  <div class="userList row"></div>
+  <div class="resultList row"></div>
 </div>

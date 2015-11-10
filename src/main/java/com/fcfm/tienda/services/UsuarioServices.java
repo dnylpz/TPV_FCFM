@@ -12,14 +12,15 @@ import java.util.List;
  * Created by jose.espinoza.lopez on 8/26/2015.
  */
 public class UsuarioServices {
+    private static final MysqlDataSource ds = ConnectionFactory.getDataSource();
+    private static Connection conn = null;
+    private static PreparedStatement stmt = null;
+    private static ResultSet rs = null;
+
     public static Usuario getUsuario(String username, String password){
         Usuario ses= null;
         String passHex = null;
         passHex = Utils.hashPassword(password);
-        MysqlDataSource ds = ConnectionFactory.getDataSource();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
         try{
             conn = ds.getConnection();
             stmt = conn.prepareStatement("CALL getusuariobyusername(?)");
@@ -50,10 +51,6 @@ public class UsuarioServices {
     }
     public static boolean agregarUsuario(String user, String name, String apel, String pass, Imagen img, Boolean isAdm){
         String hash = Utils.hashPassword(pass);
-        MysqlDataSource ds = ConnectionFactory.getDataSource();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
         try{
             conn = ds.getConnection();
             stmt = conn.prepareStatement("CALL saveusuario(?,?,?,?,?,?)");
@@ -73,6 +70,9 @@ public class UsuarioServices {
             stmt.setString(1,user);
             rs = stmt.executeQuery();
             if(rs.next()){
+                rs.close();
+                stmt.close();
+                conn.close();
                 return true;
             }
         }catch (Exception e){
@@ -82,13 +82,9 @@ public class UsuarioServices {
     }
     public static List<Usuario> searchUsuarios(String param){
         List<Usuario> result = new ArrayList<Usuario>();
-        MysqlDataSource ds = ConnectionFactory.getDataSource();
-        Connection con;
-        PreparedStatement stmt;
-        ResultSet rs;
         try{
-            con = ds.getConnection();
-            stmt = con.prepareStatement("CALL searchforusers(?)");
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement("CALL searchforusers(?)");
             stmt.setString(1,param);
             rs = stmt.executeQuery();
             int i =0;
@@ -101,7 +97,7 @@ public class UsuarioServices {
             }
             rs.close();
             stmt.close();
-            con.close();
+            conn.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -109,10 +105,6 @@ public class UsuarioServices {
     }
     public static Usuario getUsuarioById(int id){
         Usuario result = null;
-        MysqlDataSource ds = ConnectionFactory.getDataSource();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
         try{
             conn = ds.getConnection();
             stmt = conn.prepareStatement("CALL getusuariobyid(?)");
@@ -135,17 +127,13 @@ public class UsuarioServices {
     }
     public static boolean updateUsuario(int idUser, String user, String name, String apel, String pass, Imagen img, Boolean isAdm){
         Usuario ant = getUsuarioById(idUser);
-        Usuario act = new Usuario(idUser,user,pass,null,img,isAdm,name,apel);
+        String hspwd = Utils.hashPassword(pass);
+        Usuario act = new Usuario(idUser,user,hspwd,null,img,isAdm,name,apel);
         String pswd = null;
         if(act.equals(ant)){
-            return true;
+            return false;
         }else{
             MysqlDataSource ds = ConnectionFactory.getDataSource();
-            if(!act.getPasswordUsuario().equals(ant.getPasswordUsuario())) {
-               pswd  = Utils.hashPassword(act.getPasswordUsuario());
-            }else{
-                pswd = act.getPasswordUsuario();
-            }
             try {
                 Connection conn = ds.getConnection();
                 PreparedStatement stmt = conn.prepareStatement("call updateusuario(?,?,?,?,?,?,?)");
@@ -153,11 +141,15 @@ public class UsuarioServices {
                 stmt.setString(2,act.getLoginUsuario());
                 stmt.setString(3,act.getNombreUsuario());
                 stmt.setString(4,act.getApellidoUsuario());
-                stmt.setString(5,pswd);
+                stmt.setString(5,act.getPasswordUsuario());
                 if(act.getFotoUsuario() != null){
                     stmt.setInt(6,act.getFotoUsuario().getIdImagen());
                 } else{
-                    stmt.setInt(6, ant.getFotoUsuario().getIdImagen());
+                    if(ant.getFotoUsuario() != null) {
+                        stmt.setInt(6, ant.getFotoUsuario().getIdImagen());
+                    }else{
+                        stmt.setNull(6,0);
+                    }
                 }
                 stmt.setBoolean(7,act.isAdministrador());
                 stmt.execute();
@@ -173,10 +165,9 @@ public class UsuarioServices {
         return false;
     }
     public static boolean deleteUsuario(int idUser){
-        MysqlDataSource ds = ConnectionFactory.getDataSource();
         try{
-            Connection conn = ds.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("CALL deleteuser(?)");
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement("CALL deleteuser(?)");
             stmt.setInt(1,idUser);
             stmt.execute();
             return true;
