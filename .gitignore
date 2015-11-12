@@ -19,3 +19,5 @@ target/
 .idea/*
 
 out/*
+
+jboss-eap-7.0.0.Alpha-installer.jar
