@@ -119,3 +119,6 @@
     margin:0;
 
 }
+.scrolleable{
+    overflow-y: auto;
+}

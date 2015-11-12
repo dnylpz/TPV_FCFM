@@ -1,7 +1,7 @@
 package com.fcfm.tienda.servlets;
 
-import com.fcfm.tienda.services.ProductoServicios;
-import com.fcfm.tienda.services.UsuarioServices;
+import com.fcfm.tienda.services.ProductoDAO;
+import com.fcfm.tienda.services.UsuarioDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +32,7 @@ public class AdmonAjaxServlet extends HttpServlet {
         }
         if(to.equals("doEditUser")){
             request.setAttribute("action","editar");
-            request.setAttribute("usuario", UsuarioServices.getUsuarioById(Integer.parseInt(request.getParameter("itemId"))));
+            request.setAttribute("usuario", UsuarioDAO.getUsuarioById(Integer.parseInt(request.getParameter("itemId"))));
             request.getRequestDispatcher("templates/admin/addUser.jsp").forward(request,response);
         }
         if(to.equals("addProduct")){
@@ -46,7 +46,7 @@ public class AdmonAjaxServlet extends HttpServlet {
         }
         if(to.equals("doEditProduct")){
             request.setAttribute("action","editar");
-            request.setAttribute("producto", ProductoServicios.getProductoWithId(Integer.parseInt(request.getParameter("itemId"))));
+            request.setAttribute("producto", ProductoDAO.getProductoWithId(Integer.parseInt(request.getParameter("itemId"))));
             request.getRequestDispatcher("templates/admin/addProduct.jsp").forward(request,response);
         }
 

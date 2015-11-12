@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by jose.espinoza.lopez on 8/26/2015.
  */
-public class UsuarioServices {
+public class UsuarioDAO {
     private static final MysqlDataSource ds = ConnectionFactory.getDataSource();
     private static Connection conn = null;
     private static PreparedStatement stmt = null;
@@ -28,7 +28,7 @@ public class UsuarioServices {
             rs = stmt.executeQuery();
             while(rs.next()){
                 if(rs.getString(3).equals(passHex)){
-                    Imagen usrImg = ImagenServices.getImagen(rs.getInt("idUsuario"));
+                    Imagen usrImg = ImagenDAO.getImagen(rs.getInt("idUsuario"));
                     ses = new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),
                             rs.getString("passwordUsuario"),rs.getDate("ultimoAccesoUsuario"),
                             usrImg, rs.getBoolean("administrador"),
@@ -89,7 +89,7 @@ public class UsuarioServices {
             rs = stmt.executeQuery();
             int i =0;
             while(rs.next()){
-                Imagen usrImg = ImagenServices.getImagen(rs.getInt("fotoUsuario"));
+                Imagen usrImg = ImagenDAO.getImagen(rs.getInt("fotoUsuario"));
                  result.add(new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
                          rs.getDate("ultimoAccesoUsuario"),usrImg,rs.getBoolean("administrador"),
                          rs.getString("nombreUsuario"),rs.getString("apellidosUsuario")));
@@ -111,7 +111,7 @@ public class UsuarioServices {
             stmt.setInt(1,id);
             rs = stmt.executeQuery();
             while(rs.next()){
-                Imagen usrimg = ImagenServices.getImagen(rs.getInt("fotoUsuario"));
+                Imagen usrimg = ImagenDAO.getImagen(rs.getInt("fotoUsuario"));
                 result = new Usuario(id,rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
                         rs.getDate("ultimoAccesoUsuario"),usrimg,rs.getBoolean("administrador"),
                         rs.getString("nombreUsuario"),rs.getString("apellidosUsuario"));

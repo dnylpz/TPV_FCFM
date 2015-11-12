@@ -34,7 +34,7 @@ $(document).ready(function(){
             console.log("you clicked the delete button with id: " + $(this).attr("itemId"));
             var itId = $(this).attr("itemId");
             $.post(action, {itemId: itId, servicio: "borrar"}, function (reponse) {
-                alert(itemType + "Eliminado!");
+                alert(itemType + " Eliminado!");
                 $(".popup").children().remove();
                 $(".content").removeClass("inactive");
             });

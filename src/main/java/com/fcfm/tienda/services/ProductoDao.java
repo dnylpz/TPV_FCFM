@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by jose.espinoza.lopez on 11/9/2015.
  */
-public class ProductoServicios {
+public class ProductoDAO {
     private static final MysqlDataSource ds = ConnectionFactory.getDataSource();
     private static Connection conn = null;
     private static PreparedStatement stmt = null;
@@ -58,7 +58,7 @@ public class ProductoServicios {
             stmt.setLong(1, upc);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Imagen primg = ImagenServices.getImagen(rs.getInt(5));
+                Imagen primg = ImagenDAO.getImagen(rs.getInt(5));
                 nuevo = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7));
                 conn.close();
                 stmt.close();
@@ -81,7 +81,7 @@ public class ProductoServicios {
             stmt.setString(1, searchParam);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                primg = ImagenServices.getImagen(rs.getInt(5));
+                primg = ImagenDAO.getImagen(rs.getInt(5));
                 p = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7));
                 result.add(p);
             }
@@ -102,7 +102,7 @@ public class ProductoServicios {
             stmt.setLong(1, id);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Imagen primg = ImagenServices.getImagen(rs.getInt(5));
+                Imagen primg = ImagenDAO.getImagen(rs.getInt(5));
                 nuevo = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7));
                 conn.close();
                 stmt.close();

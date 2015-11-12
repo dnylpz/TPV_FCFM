@@ -10,6 +10,7 @@ import javax.activation.DataSource;
 import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -23,6 +24,7 @@ public class ConnectionFactory  {
         try{
             // THIS LINE HAS TO BE CHANGED DEPENDING ON ENVIRONMENT
             fis = new FileInputStream("C:\\Users\\jose.espinoza.lopez\\Documents\\Proyectos\\src\\main\\resources\\db.properties");
+           // fis = fis.getClass().getClassLoader().getResourceAsStream("db.properties");
             props.load(fis);
             mysqlDS = new MysqlDataSource();
             mysqlDS.setURL(props.getProperty("MYSQL_DB_URL"));

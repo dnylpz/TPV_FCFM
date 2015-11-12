@@ -1,8 +1,8 @@
 package com.fcfm.tienda.servlets;
 
 import com.fcfm.tienda.models.Imagen;
-import com.fcfm.tienda.services.ImagenServices;
-import com.fcfm.tienda.services.ProductoServicios;
+import com.fcfm.tienda.services.ImagenDAO;
+import com.fcfm.tienda.services.ProductoDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,7 +25,7 @@ public class ProductosServlet extends HttpServlet {
 
         if(servicio.equals("borrar")){
             int idProducto = Integer.parseInt(request.getParameter("itemId"));
-            ProductoServicios.deleteProducto(idProducto);
+            ProductoDAO.deleteProducto(idProducto);
         }else {
             String nombre;
             String descripcion;
@@ -41,13 +41,13 @@ public class ProductosServlet extends HttpServlet {
             imagen = request.getPart("imagen");
             precio = Double.parseDouble(request.getParameter("precio"));
             existencia = Integer.parseInt(request.getParameter("existencia"));
-            prImg = ImagenServices.parseImage(imagen);
+            prImg = ImagenDAO.parseImage(imagen);
             if (servicio.equals("editar")) {
                 int idProducto = Integer.parseInt(request.getParameter("idProducto"));
-                ProductoServicios.updateProducto(idProducto, nombre, descripcion,
+                ProductoDAO.updateProducto(idProducto, nombre, descripcion,
                         UPC, prImg, precio, existencia);
             } else {
-                ProductoServicios.agregarProducto(nombre, descripcion, UPC, prImg, precio, existencia);
+                ProductoDAO.agregarProducto(nombre, descripcion, UPC, prImg, precio, existencia);
             }
         }
         request.getRequestDispatcher("/admon.jsp").forward(request,response);

@@ -27,30 +27,22 @@
         <div class="container">
             <div class="row">
                 <div class="four columns">
-                    <img src="img/tLogo.png">
+                    <img src="${pageContext.request.contextPath}/imagen?id=${applicationScope["empresa"].getLogo().getIdImagen()}">
                 </div>
                 <h1 class="four columns">Venta</h1>
                 <div class="two columns offset-by-two">
-                <a class="button" href="./login" <% if(!user.isAdministrador()){%> style="visibility:hidden" <%}%>><p>Ir a admin</p></a>
+                    <% if(!user.isAdministrador()){%>
+                        <a class="button" href="./login" ><p>Ir a admin</p></a>
+                    <%}%>
                 <a class="button" href="index.jsp"><p>Salir</p></a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="popup resultlist"></div>
     <div class="main">
-        <div class="products">
+        <div class="products scrolleable">
             <div class="container" id="product-list">
-                <div class="product row">
-                    <div class="two columns offset-by-two columns product-image">
-                        <img src="img/product_placeholder.jpg" alt="producto"/>
-                    </div>
-                    <p class="eight columns">
-                        descripcion producto
-                        UPC:0000000000000
-                        Precio Normal: $00.00 Promocion: 000000
-                        Ahorra:$00.00 Precio a pagar: $00
-                    </p>
-                </div>
             </div>
         </div>
         <div class="sidebar">
@@ -66,11 +58,11 @@
                 <div class="row">
                     <p class="six columns offset-by-three"><%= userName%></p>
                 </div>
-                <div class="row">
-                    <form action="/search" method="post" >
+                <div class="row addform">
+                    <form id="addproduct" action="agregaproducto" method="POST" >
                         <label>INGRESE ARTICULO</label>
-                        <input type="text" name="articulo">
-                        <input type="submit" value="Agregar">
+                        <input type="text" name="arti" id="articulo"/>
+                        <input type="submit" value="Agregar"/>
                     </form>
                 </div>
                 <div class="row">
@@ -83,7 +75,7 @@
         <div class="container footer-content">
             <div class="row">
                 <h2 class="five columns">TOTAL A PAGAR:</h2>
-                <h2 class="two columns offset-by-two"> $00.00</h2>
+                <h2 class="two columns offset-by-two"> $${total}</h2>
                 <a href="pagar" class="two columns offset-by-one button">Pagar</a>
             </div>
             <div class="row">
@@ -101,5 +93,8 @@
         </div>
     </div>
 </div>
+<script src="js/jQuery.js"></script>
+<script src="js/search.js"></script>
+<script src="js/venta.js"></script>
 </body>
 </html>

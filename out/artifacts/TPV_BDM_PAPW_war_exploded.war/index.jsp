@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
-        uri="http://java.sun.com/jstl/core"%>
+        uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>tienda max</title>
@@ -21,10 +21,10 @@
     <div class="container">
         <div class="row">
             <div class="one-half column logo">
-                <img src="img/tLogo.png" alt="logo"/>
+                <img src="${pageContext.request.contextPath}/imagen?id=${applicationScope["empresa"].getLogo().getIdImagen()}" alt="logo"/>
             </div>
             <div class="one-half column column">
-                <h1 class="">TIENDA MAX</h1>
+                <h1 class="Title">${applicationScope["empresa"].getNombre()}</h1>
             </div>
         </div>
     </div>

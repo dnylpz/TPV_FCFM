@@ -2,8 +2,8 @@ package com.fcfm.tienda.servlets;
 
 import com.fcfm.tienda.models.Producto;
 import com.fcfm.tienda.models.Usuario;
-import com.fcfm.tienda.services.ProductoServicios;
-import com.fcfm.tienda.services.UsuarioServices;
+import com.fcfm.tienda.services.ProductoDAO;
+import com.fcfm.tienda.services.UsuarioDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,13 +24,13 @@ public class SearchServlet extends HttpServlet {
         String param = request.getParameter("searchParam");
         if(searchFor.equals("Usuario")) {
             List<Usuario> resultado;
-            resultado = UsuarioServices.searchUsuarios(param);
+            resultado = UsuarioDAO.searchUsuarios(param);
             request.setAttribute("resultado", resultado);
             request.getRequestDispatcher("templates/search/userlist.jsp").forward(request, response);
         }
         if(searchFor.equals("Producto")){
             List<Producto> resultado;
-            resultado = ProductoServicios.buscaProducto(param);
+            resultado = ProductoDAO.buscaProducto(param);
             request.setAttribute("resultado", resultado);
             request.getRequestDispatcher("templates/search/productlist.jsp").forward(request,response);
         }

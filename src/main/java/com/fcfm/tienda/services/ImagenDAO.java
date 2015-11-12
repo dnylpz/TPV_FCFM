@@ -14,7 +14,7 @@ import java.sql.SQLException;
 /**
  * Created by jose.espinoza.lopez on 10/27/2015.
  */
-public class ImagenServices {
+public class ImagenDAO {
     private static final MysqlDataSource ds = ConnectionFactory.getDataSource();
     private static Connection conn = null;
     private static PreparedStatement stmt = null;

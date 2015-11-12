@@ -2,7 +2,7 @@ package com.fcfm.tienda.servlets;
 
 
 import com.fcfm.tienda.models.Usuario;
-import com.fcfm.tienda.services.UsuarioServices;
+import com.fcfm.tienda.services.UsuarioDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         if(session.getAttribute("user") != null){
             ses = (Usuario) session.getAttribute("user");
         }else{
-            ses = UsuarioServices.getUsuario(username, password);
+            ses = UsuarioDAO.getUsuario(username, password);
             if(ses!=null){
                 session.setAttribute("user",ses);
                 session.setMaxInactiveInterval(30*60);

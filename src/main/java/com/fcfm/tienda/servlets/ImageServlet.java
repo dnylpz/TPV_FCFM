@@ -1,9 +1,8 @@
 package com.fcfm.tienda.servlets;
 
 import com.fcfm.tienda.models.Imagen;
-import com.fcfm.tienda.services.ImagenServices;
+import com.fcfm.tienda.services.ImagenDAO;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.SQLException;
 
 /**
@@ -23,7 +21,7 @@ import java.sql.SQLException;
 public class ImageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Imagen a = ImagenServices.getImagen(id);
+        Imagen a = ImagenDAO.getImagen(id);
         if(a!=null) {
             response.setContentType(a.getTipoImagen());
             ServletOutputStream out = response.getOutputStream();
