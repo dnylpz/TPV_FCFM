@@ -75,7 +75,9 @@
         <div class="container footer-content">
             <div class="row">
                 <h2 class="five columns">TOTAL A PAGAR:</h2>
-                <h2 class="two columns offset-by-two"> $${total}</h2>
+                <div id="totalOut">
+
+                </div>
                 <a href="pagar" class="two columns offset-by-one button">Pagar</a>
             </div>
             <div class="row">

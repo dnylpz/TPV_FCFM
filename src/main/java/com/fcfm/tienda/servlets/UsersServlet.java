@@ -40,7 +40,7 @@ public class UsersServlet extends HttpServlet {
             String apellido = request.getParameter("apellido");
             String password = request.getParameter("password");
             boolean admin = false;
-            if (request.getParameter("isAdmin") == "true") {
+            if (request.getParameter("isAdmin").equals("true")) {
                 admin = true;
             }
 
@@ -48,7 +48,7 @@ public class UsersServlet extends HttpServlet {
 
             usrImg = ImagenDAO.parseImage(fotoPart); //generates BLOB, construct and save an image
 
-            if (request.getParameter("servicio").equals("Editar")) {
+            if (request.getParameter("servicio").equals("editar")) {
                 if (UsuarioDAO.updateUsuario(idUser, username, nombre, apellido, password, usrImg, admin)) {
                     request.getRequestDispatcher("/admon.jsp").forward(request, response);
                 } else {

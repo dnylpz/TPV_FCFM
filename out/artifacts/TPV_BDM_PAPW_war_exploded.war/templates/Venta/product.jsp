@@ -21,4 +21,5 @@
         <p class="four columns">Descripcion: ${producto.getDescripcion()}</p>
         <p class="three columns">Precio: ${producto.getPrecio()}</p>
     </div>
+    <input type="hidden" id="totalIn${count}" value="${sessionScope["venta"].getTotal()}"/>
 </div>
