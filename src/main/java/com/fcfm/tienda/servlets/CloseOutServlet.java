@@ -10,13 +10,14 @@ import java.io.IOException;
 /**
  * Created by jose.espinoza.lopez on 11/12/2015.
  */
-@WebServlet(name = "CloseOutServlet")
+@WebServlet(name = "CloseOutServlet",
+            urlPatterns = "/pagar")
 public class CloseOutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("A PAGAR! :D");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 }

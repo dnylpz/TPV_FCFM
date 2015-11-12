@@ -21,4 +21,11 @@ $(document).ready(function(){
             $("#totalOut").html(htm);
         });
     });
+
+    $("#closeSale").on("click",function(e){
+        e.preventDefault();
+        $.post("metododepago",{},function(response){
+
+        });
+    });
 });

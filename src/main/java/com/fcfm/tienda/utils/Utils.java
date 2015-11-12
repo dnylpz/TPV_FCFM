@@ -1,6 +1,8 @@
 package com.fcfm.tienda.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -33,5 +35,12 @@ public class Utils {
             hexChars[j*2+1] = hexArray[v & 0x0F];
         }
         return new String(hexChars);
+    }
+
+    public static Double round(double value,int positions){
+        if(positions < 0 ) throw new IllegalArgumentException();
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(positions, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

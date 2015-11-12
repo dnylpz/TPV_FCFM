@@ -78,7 +78,7 @@
                 <div id="totalOut">
 
                 </div>
-                <a href="pagar" class="two columns offset-by-one button">Pagar</a>
+                <a href="pagar" id="closeSale" class="two columns offset-by-one button">Pagar</a>
             </div>
             <div class="row">
                 <div class="two columns">
