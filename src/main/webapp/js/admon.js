@@ -8,6 +8,9 @@ $(document).ready(function(){
         $.post("adminajax",{to: $(this).attr('id')},function(response){
             $('.content').addClass('inactive');
             $(".popup").html(response);
+            if($("#datePicker").length){
+                $("#datePicker").datepicker();
+            }
             $(".popup").on('click','#cerrar',function(event){
                 console.log("clicked!");
                 $(".popup").children().remove();

@@ -33,10 +33,16 @@ CREATE TABLE `usuarios` (
   `administrador` tinyint(1) DEFAULT NULL,
   `nombreUsuario` varchar(45) DEFAULT NULL,
   `apellidosUsuario` varchar(45) DEFAULT NULL,
+  `sexo` tinyint(4) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `nivelDeEstudios` varchar(45) DEFAULT NULL,
+  `Domicilio` int(11) DEFAULT NULL,
+  `RFC` varchar(13) DEFAULT 'XAXX010101000',
+  `CURP` varchar(18) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `loginUsuario_UNIQUE` (`loginUsuario`),
   KEY `imagenUsuario_idx` (`fotoUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +51,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'dnylpz','c3e662d0b048cfe1f2bf38a785380b75','2015-11-11 14:01:06',1,1,'Daniel','Espinoza');
+INSERT INTO `usuarios` VALUES (1,'dnylpz','c3e662d0b048cfe1f2bf38a785380b75','2015-11-13 15:15:21',1,1,'Daniel','Espinoza',NULL,NULL,NULL,1,'XAXX010101000',NULL),(10,'efaustinos','5fa7452891a3470919d86b5252b0914a','2015-11-11 18:09:26',12,1,'Esdras','Faustinos',NULL,NULL,NULL,NULL,'XAXX010101000',NULL),(11,'slopezp','ea4b708cd29b4b9514d4460a48aae067','2015-11-13 12:52:16',16,0,'Sonia','Lopez',0,'1975-11-02','preparatoria',6,'LOPS751102001','LOPS751102MPLPLN05');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-11 17:57:02
+-- Dump completed on 2015-11-13 15:20:12

@@ -11,8 +11,11 @@
     h3{
         padding-top:.8em;
     }
+    .hidden{
+        display:none;
+    }
 </style>
-<div class="product row">
+<div class="product row hidden">
     <div class="two columns product-image">
         <img src="${pageContext.request.contextPath}/imagen?id=${producto.getImagen().getIdImagen()}" alt="producto"/>
     </div>
@@ -21,4 +24,5 @@
         <p class="four columns">Descripcion: ${producto.getDescripcion()}</p>
         <p class="three columns">Precio: ${producto.getPrecio()}</p>
     </div>
+    <input type="hidden" id="totalIn${count}" value="${sessionScope["venta"].getTotal()}"/>
 </div>

@@ -1,6 +1,5 @@
 package com.fcfm.tienda.models;
 
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
@@ -15,9 +14,14 @@ public class Usuario {
     private boolean administrador;
     private String nombreUsuario;
     private String apellidoUsuario;
+    private boolean sexo;
+    private Date fechaNacimiento;
+    private String nivelDeEstudios;
+    private Domicilio domicilio;
+    private String rfc;
+    private String curp;
 
-    public Usuario(int idUsuario, String loginUsuario, String passwordUsuario, Date ultimoAccesoUsuario,
-                   Imagen fotoUsuario, boolean administrador, String nombreUsuario, String apellidoUsuario) {
+    public Usuario(int idUsuario, String loginUsuario, String passwordUsuario, Date ultimoAccesoUsuario, Imagen fotoUsuario, boolean administrador, String nombreUsuario, String apellidoUsuario, boolean sexo, Date fechaNacimiento, String nivelDeEstudios, Domicilio domicilio, String rfc, String curp) {
         this.idUsuario = idUsuario;
         this.loginUsuario = loginUsuario;
         this.passwordUsuario = passwordUsuario;
@@ -26,7 +30,14 @@ public class Usuario {
         this.administrador = administrador;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
+        this.sexo = sexo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.nivelDeEstudios = nivelDeEstudios;
+        this.domicilio = domicilio;
+        this.rfc = rfc;
+        this.curp = curp;
     }
+
 
     public String getApellidoUsuario() {
         return apellidoUsuario;
@@ -117,5 +128,53 @@ public class Usuario {
 
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
+    }
+
+    public boolean isSexo() {
+        return sexo;
+    }
+
+    public void setSexo(boolean sexo) {
+        this.sexo = sexo;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getNivelDeEstudios() {
+        return nivelDeEstudios;
+    }
+
+    public void setNivelDeEstudios(String nivelDeEstudios) {
+        this.nivelDeEstudios = nivelDeEstudios;
+    }
+
+    public Domicilio getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
 }

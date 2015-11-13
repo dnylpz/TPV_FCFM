@@ -16,9 +16,9 @@ log/
 target/
 
 
-.idea/*
+.idea/
 
-out/*
+out/
 
 jboss-eap-7.0.0.Alpha-installer.jar
-src/main/java/com/fcfm/tienda/models/Detalle.java.rej
+

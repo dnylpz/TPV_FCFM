@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="css/skeleton.css">
     <link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+
     <% Usuario user = (Usuario)session.getAttribute("user");
         String userName = user.getNombreUsuario() + " " +  user.getApellidoUsuario();
         int idFoto = user.getFotoUsuario().getIdImagen();
@@ -31,7 +33,7 @@
                 </div>
                 <h1 class="four columns">Venta</h1>
                 <div class="two columns offset-by-two">
-                    <% if(!user.isAdministrador()){%>
+                    <% if(user.isAdministrador()){%>
                         <a class="button" href="./login" ><p>Ir a admin</p></a>
                     <%}%>
                 <a class="button" href="index.jsp"><p>Salir</p></a>
@@ -39,6 +41,7 @@
             </div>
         </div>
     </div>
+    <div class="popup metodos"></div>
     <div class="popup resultlist"></div>
     <div class="main">
         <div class="products scrolleable">
@@ -75,8 +78,8 @@
         <div class="container footer-content">
             <div class="row">
                 <h2 class="five columns">TOTAL A PAGAR:</h2>
-                <h2 class="two columns offset-by-two"> $${total}</h2>
-                <a href="pagar" class="two columns offset-by-one button">Pagar</a>
+                <div id="totalOut"></div>
+                <a href="#" id="closeSale" class="two columns button">Pagar</a>
             </div>
             <div class="row">
                 <div class="two columns">

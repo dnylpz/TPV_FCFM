@@ -62,6 +62,26 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getdomiciliobyid` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getdomiciliobyid`(in id int)
+BEGIN 
+	SELECT idDomicilio, pais,estado,ciudad,codigoPostal,colonia,calle,numero 
+    from domicilio where idDomicilio = id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getEmpresa` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -158,7 +178,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `getusuariobyid` */;
+/*!50003 DROP PROCEDURE IF EXISTS `getuserbyid` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -168,9 +188,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getusuariobyid`(in id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getuserbyid`(in id int)
 BEGIN
-	SELECT loginUsuario, passwordUsuario, ultimoAccesoUsuario, fotoUsuario, administrador, nombreUsuario, apellidosUsuario
+	SELECT idUsuario, loginUsuario, passwordUsuario, ultimoAccesoUsuario, fotoUsuario, administrador, nombreUsuario, apellidosUsuario, sexo, fecha_nacimiento, nivelDeEstudios,Domicilio,RFC,CURP 
     from usuarios where idUsuario = id;
 END ;;
 DELIMITER ;
@@ -186,12 +206,33 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getusuariobyusername`(IN usuario VARCHAR(30))
 BEGIN
  UPDATE usuarios SET `ultimoAccesoUsuario` = NOW() WHERE loginUsuario = usuario;
- SELECT idUsuario, loginUsuario, passwordUsuario, ultimoAccesoUsuario, fotoUsuario, administrador, nombreUsuario, apellidosUsuario FROM usuarios WHERE loginUsuario = usuario;
+ SELECT idUsuario, loginUsuario, passwordUsuario, ultimoAccesoUsuario, fotoUsuario, administrador, nombreUsuario, apellidosUsuario, sexo, fecha_nacimiento, nivelDeEstudios,Domicilio,RFC,CURP FROM usuarios WHERE loginUsuario = usuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `saveDomicilio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `saveDomicilio`(in ps VARCHAR(30),in eo VARCHAR(30),
+in cid VARCHAR(30),in cp INT(11),in col VARCHAR(30), in st VARCHAR(30),in num VARCHAR(30))
+BEGIN
+		INSERT INTO domicilio (pais,estado,ciudad,codigoPostal,colonia,calle,numero) values(ps,eo,cid,cp,col,st,num);
+		Select MAX(idDomicilio) from domicilio where calle = st AND numero = num;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -244,11 +285,15 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `saveusuario`(IN username VARCHAR(30), IN pass VARCHAR(32), IN foto INT,IN admin BOOL, IN nombre VARCHAR(30), IN apel VARCHAR(30))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `saveusuario`( in login VARCHAR(20), in pwd VARCHAR(32), 
+	in foto INT, in admin BOOL, in nombre VARCHAR(20), in apel VARCHAR(20), in sex Bool,
+	in fNan date,in nEst VARCHAR(20),in dom INT,in rfcIn VARCHAR(13),in curpIn VARCHAR(20))
 BEGIN
-	INSERT INTO usuarios (`loginUsuario`,`passwordUsuario`,`fotoUsuario`,`administrador`,`nombreUsuario`,`apellidosUsuario`) VALUES (username,pass,foto,admin,nombre,apel);
+	INSERT INTO usuarios (`loginUsuario`,`passwordUsuario`,`fotoUsuario`,`administrador`,`nombreUsuario`,`apellidosUsuario`,
+    `sexo`,`fecha_nacimiento`,`nivelDeEstudios`,`Domicilio`,`RFC`,`CURP`) 
+    VALUES (login,pwd,foto,admin,nombre,apel,sex,fNan,nEst,dom,rfcIn,curpIn);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -267,7 +312,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `searchforusers`(IN param VARCHAR(30))
 BEGIN
-	SELECT idUsuario, loginUsuario, passwordUsuario, ultimoAccesoUsuario, fotoUsuario,administrador,nombreUsuario,apellidosUsuario
+	SELECT idUsuario, loginUsuario, passwordUsuario, ultimoAccesoUsuario, fotoUsuario, administrador, nombreUsuario, apellidosUsuario, sexo, fecha_nacimiento, nivelDeEstudios,Domicilio,RFC,CURP 
     from usuarios where loginUsuario like CONCAT("%",param,"%") OR nombreUsuario like CONCAT("%",param,"%") OR apellidosUsuario like CONCAT("%",param,"%");
     END ;;
 DELIMITER ;
@@ -327,11 +372,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateusuario`(in id int, in login varchar(30), in nom varchar(30), in apel varchar(30), 
-								in pass varchar(32), in  image int, in isadm bool)
-Begin
-	Update usuarios set loginUsuario = login, passwordUsuario = pass, fotoUsuario = image, administrador = isadm, nombreUsuario = nom,
-    apellidosUsuario = apel where idUsuario = id;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateusuario`(in id INT, in login VARCHAR(20), in pwd VARCHAR(32), 
+in foto INT, in admin BOOL, in nombre VARCHAR(20), in apel VARCHAR(20), in sex Bool,
+in fNan date,in nEst VARCHAR(20),in dom INT,in rfcIn VARCHAR(13),in curpIn VARCHAR(20))
+BEGIN
+	UPDATE usuarios set loginUsuario = login, passwordUsuario = pwd, fotoUsuario = foto,
+	administrador = admin, nombreUsuario = nombre, apellidosUsuario = apel, sexo = sex, 
+    fecha_nacimiento = fNan, nivelDeEstudios = nEst, Domicilio = dom, RFC = rfcin, CURP = curpIn
+    where idUsuario = id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -348,4 +396,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-11 17:57:07
+-- Dump completed on 2015-11-13 15:20:14

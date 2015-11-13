@@ -3,6 +3,7 @@ package com.fcfm.tienda.listeners; /**
  */
 
 import com.fcfm.tienda.models.Empresa;
+import com.fcfm.tienda.services.ConnectionFactory;
 import com.fcfm.tienda.services.EmpresaDAO;
 
 import javax.servlet.ServletContext;
@@ -31,6 +32,7 @@ public class InitListener implements ServletContextListener,
          You can initialize servlet context related data here.
       */
         ServletContext sc = sce.getServletContext();
+        ConnectionFactory.setServletContex(sc);
         Empresa emp  = EmpresaDAO.empresaFactory();
         sc.setAttribute("empresa",emp);
     }

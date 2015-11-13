@@ -3,6 +3,7 @@ package com.fcfm.tienda.servlets;
 import com.fcfm.tienda.models.Detalle;
 import com.fcfm.tienda.models.Producto;
 import com.fcfm.tienda.services.ProductoDAO;
+import com.fcfm.tienda.utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,6 @@ public class VentaServlet extends HttpServlet {
         Detalle venta = (Detalle) request.getSession().getAttribute("venta");
         if(venta == null){
             venta = new Detalle();
-
         }
         try{
             Producto result;
@@ -31,23 +31,24 @@ public class VentaServlet extends HttpServlet {
             result = ProductoDAO.getProductoWithUPC(UPC);
             double total = venta.getTotal();
             total += result.getPrecio();
+            total = Utils.round(total,2);
             venta.setTotal(total);
             venta.getProductos().add(result);
             request.getSession().setAttribute("venta",venta);
-            request.setAttribute("total",venta.getTotal());
             request.setAttribute("producto",result);
-
+            request.setAttribute("count",venta.getProductos().size());
             request.getRequestDispatcher("templates/Venta/product.jsp").forward(request,response);
         }catch(NumberFormatException nfe){
             List<Producto> result;
             result = ProductoDAO.buscaProducto(articulo);
-            request.setAttribute("productos",result);
+            request.setAttribute("resultado",result);
+            request.setAttribute("venta","esVenta");
             request.getRequestDispatcher("templates/search/productlist.jsp").forward(request,response);
         }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 }

@@ -12,7 +12,12 @@
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
-<div class="content ten columns offset-by-one">
+<style>
+  .hidden{
+    display:none;
+  }
+</style>
+<div class="content ten columns offset-by-one sResults hidden">
   <table>
     <thead>
     <tr>
@@ -21,8 +26,12 @@
       <th>UPC</th>
       <th>Precio</th>
       <th>Existencia</th>
-      <th>Editar</th>
-      <th>Borrar</th>
+      <% if(request.getAttribute("venta").equals("esVenta")){%>
+        <th>Agregar</th>
+      <%}else{%>
+        <th>Editar</th>
+        <th>Borrar</th>
+      <%}%>
     </tr>
     </thead>
     <tbody>
@@ -33,8 +42,13 @@
         <td>${x.getUPC()}</td>
         <td>${x.getPrecio()}</td>
         <td>${x.getExistencia()}</td>
-        <td><a href="#" class="button edit"  action="adminajax" servicio="doEditProduct" itemId="${x.getIdProducto()}">Editar</a></td>
-        <td><a href="#" class="button delete"  action="serveproductos" itemType="Producto" style="background-color:red; color:white;"  itemId="${x.getIdProducto()}">Borrar</a></td>
+        <%if(request.getAttribute("venta").equals("esVenta")){%>
+          <td><a href="#" class="button add" itemId="${x.getUPC()}">Agregar</a></td>
+        <%}else{%>
+          <td><a href="#" class="button edit"  action="adminajax" servicio="doEditProduct" itemId="${x.getIdProducto()}">Editar</a></td>
+          <td><<a href="#" class="button delete"  action="serveproductos" itemType="Producto" style="background-color:red; color:white;"  itemId="${x.getIdProducto()}">Borrar</a></td>
+        <%}%>
+
       </tr>
     </c:forEach>
     </tbody>

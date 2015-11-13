@@ -15,8 +15,9 @@
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/skeleton.css">
     <link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>
+    <link href="css/jquery-ui.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/popup.css"
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
     <% Usuario user = (Usuario)session.getAttribute("user");
         String userName = user.getNombreUsuario() + " " +  user.getApellidoUsuario();
     %>
@@ -36,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="popup"></div>
+        <div class="popup scrolleable"></div>
         <div class="content">
             <div class="container body-content">
                 <div class="row">
@@ -72,6 +73,7 @@
     </div>
     <script src="js/jQuery.js" type="text/javascript"></script>
     <script src="js/jquery.validate.js" type="text/javascript"></script>
+    <script src="js/jquery-ui.min.js" type="text/javascript"></script>
     <script src="js/admon.js" type="text/javascript"></script>
     <script src="js/search.js" type="text/javascript"></script>
 </body>

@@ -31,8 +31,7 @@ CREATE TABLE `detalle` (
   `Promociones_idPromocion` int(11) NOT NULL,
   `Usuarios_idUsuario` int(11) NOT NULL,
   `clientes_idCliente` int(11) NOT NULL,
-  `fechaDetalle` date DEFAULT NULL,
-  `horaDetalle` time DEFAULT NULL,
+  `fechaDetalle` datetime DEFAULT NULL,
   `total` double DEFAULT NULL,
   PRIMARY KEY (`idDetalle`),
   KEY `fk_Transacciones_FormasDePago1_idx` (`FormasDePago_idformaDePago`),
@@ -61,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-11 17:57:04
+-- Dump completed on 2015-11-13 15:20:13

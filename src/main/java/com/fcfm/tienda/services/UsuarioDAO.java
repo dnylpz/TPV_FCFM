@@ -1,12 +1,13 @@
 package com.fcfm.tienda.services;
 
+import com.fcfm.tienda.models.Domicilio;
 import com.fcfm.tienda.models.Imagen;
 import com.fcfm.tienda.models.Usuario;
 import com.fcfm.tienda.utils.Utils;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Created by jose.espinoza.lopez on 8/26/2015.
@@ -28,11 +29,13 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             while(rs.next()){
                 if(rs.getString(3).equals(passHex)){
+                    //TODO GET ADRESSS
                     Imagen usrImg = ImagenDAO.getImagen(rs.getInt("idUsuario"));
                     ses = new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),
                             rs.getString("passwordUsuario"),rs.getDate("ultimoAccesoUsuario"),
                             usrImg, rs.getBoolean("administrador"),
-                            rs.getString("nombreUsuario"), rs.getString("apellidosUsuario"));
+                            rs.getString("nombreUsuario"), rs.getString("apellidosUsuario"),rs.getBoolean("sexo"),rs.getDate(9),
+                            rs.getString(10),null,rs.getString(12),rs.getString(13));
                 }
             }
         }catch(SQLException e){
@@ -49,11 +52,13 @@ public class UsuarioDAO {
         }
         return ses;
     }
-    public static boolean agregarUsuario(String user, String name, String apel, String pass, Imagen img, Boolean isAdm){
+    //TODO ADD PARAMETERS
+    public static boolean agregarUsuario(String user, String name, String apel, String pass, Imagen img, boolean isAdm,boolean sex,
+                                         java.util.Date fNan, String  nDEs, Domicilio dom, String RFC, String CURP){
         String hash = Utils.hashPassword(pass);
         try{
             conn = ds.getConnection();
-            stmt = conn.prepareStatement("CALL saveusuario(?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("CALL saveusuario(?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1,user);
             stmt.setString(2,hash);
             if(img != null) {
@@ -64,6 +69,17 @@ public class UsuarioDAO {
             stmt.setBoolean(4,isAdm);
             stmt.setString(5,name);
             stmt.setString(6,apel);
+            stmt.setBoolean(7,sex);
+            Date fnac = new Date(fNan.getTime());
+            stmt.setDate(8,fnac);
+            stmt.setString(9,nDEs);
+            try {
+                stmt.setInt(10, dom.getId());
+            }catch(NullPointerException npe){
+                stmt.setNull(10,0);
+            }
+            stmt.setString(11,RFC);
+            stmt.setString(12,CURP);
             stmt.execute();
             stmt.close();
             stmt = conn.prepareStatement("CALL getusuariobyusername(?)");
@@ -90,9 +106,12 @@ public class UsuarioDAO {
             int i =0;
             while(rs.next()){
                 Imagen usrImg = ImagenDAO.getImagen(rs.getInt("fotoUsuario"));
+                java.util.Date dat = new java.util.Date(rs.getDate(10).getTime());
+                Domicilio dom = DomicilioDAO.getDomicilio(rs.getInt(12));
                  result.add(new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
                          rs.getDate("ultimoAccesoUsuario"),usrImg,rs.getBoolean("administrador"),
-                         rs.getString("nombreUsuario"),rs.getString("apellidosUsuario")));
+                         rs.getString("nombreUsuario"),rs.getString("apellidosUsuario"),rs.getBoolean(9),dat,
+                         rs.getString(11),dom,rs.getString(13),rs.getString(14)));
                 i++;
             }
             rs.close();
@@ -107,14 +126,17 @@ public class UsuarioDAO {
         Usuario result = null;
         try{
             conn = ds.getConnection();
-            stmt = conn.prepareStatement("CALL getusuariobyid(?)");
+            stmt = conn.prepareStatement("CALL getuserbyid(?)");
             stmt.setInt(1,id);
             rs = stmt.executeQuery();
             while(rs.next()){
-                Imagen usrimg = ImagenDAO.getImagen(rs.getInt("fotoUsuario"));
-                result = new Usuario(id,rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
-                        rs.getDate("ultimoAccesoUsuario"),usrimg,rs.getBoolean("administrador"),
-                        rs.getString("nombreUsuario"),rs.getString("apellidosUsuario"));
+                Imagen usrImg = ImagenDAO.getImagen(rs.getInt("fotoUsuario"));
+                java.util.Date dat = new java.util.Date(rs.getDate(10).getTime());
+                Domicilio dom = DomicilioDAO.getDomicilio(rs.getInt(12));
+                result = new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
+                        rs.getDate("ultimoAccesoUsuario"),usrImg,rs.getBoolean("administrador"),
+                        rs.getString("nombreUsuario"),rs.getString("apellidosUsuario"),rs.getBoolean(9),dat,
+                        rs.getString(11),dom,rs.getString(13),rs.getString(14));
             }
             rs.close();
             stmt.close();
@@ -125,18 +147,19 @@ public class UsuarioDAO {
         }
         return result;
     }
-    public static boolean updateUsuario(int idUser, String user, String name, String apel, String pass, Imagen img, Boolean isAdm){
+
+    public static boolean updateUsuario(int idUser, String user, String name, String apel, String pass, Imagen img, boolean isAdm,
+                                        boolean sex,java.util.Date fNan, String nDEs,Domicilio dom,String RFC, String CURP ){
         Usuario ant = getUsuarioById(idUser);
         String hspwd = Utils.hashPassword(pass);
-        Usuario act = new Usuario(idUser,user,hspwd,null,img,isAdm,name,apel);
-        String pswd = null;
+        Usuario act = new Usuario(idUser,user,hspwd,null,img,isAdm,name,apel,sex,fNan,nDEs,dom,RFC,CURP);
         if(act.equals(ant)){
             return false;
         }else{
             MysqlDataSource ds = ConnectionFactory.getDataSource();
             try {
                 Connection conn = ds.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("call updateusuario(?,?,?,?,?,?,?)");
+                PreparedStatement stmt = conn.prepareStatement("call updateusuario(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 stmt.setInt(1,act.getIdUsuario());
                 stmt.setString(2,act.getLoginUsuario());
                 stmt.setString(3,act.getNombreUsuario());
@@ -152,6 +175,13 @@ public class UsuarioDAO {
                     }
                 }
                 stmt.setBoolean(7,act.isAdministrador());
+                stmt.setBoolean(8,act.isSexo());
+                Date sqlDate = new Date(act.getFechaNacimiento().getTime());
+                stmt.setDate(9,sqlDate);
+                stmt.setString(10,nDEs);
+                stmt.setInt(11,act.getDomicilio().getId());
+                stmt.setString(12,act.getRfc());
+                stmt.setString(13,act.getCurp());
                 stmt.execute();
                 stmt.close();
                 conn.close();

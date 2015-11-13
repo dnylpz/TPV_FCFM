@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="TPV_BDM_PAPW" />
+        <module name="TPV_FCFM" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="TPV_BDM_PAPW" target="1.5" />
+      <module name="TPV_FCFM" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
