@@ -1,8 +1,6 @@
 package com.fcfm.tienda.models;
 
-//import org.joda.time.LocalTime;
 import org.joda.time.LocalTime;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -21,6 +19,7 @@ public class Detalle {
     private Date fecha;
     private LocalTime hora;
     private double total;
+
 
     public Detalle() {
         this.productos = new ArrayList<Producto>();

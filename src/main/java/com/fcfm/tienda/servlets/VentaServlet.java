@@ -3,7 +3,6 @@ package com.fcfm.tienda.servlets;
 import com.fcfm.tienda.models.Detalle;
 import com.fcfm.tienda.models.Producto;
 import com.fcfm.tienda.services.ProductoDAO;
-import com.fcfm.tienda.utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +23,7 @@ public class VentaServlet extends HttpServlet {
         Detalle venta = (Detalle) request.getSession().getAttribute("venta");
         if(venta == null){
             venta = new Detalle();
+
         }
         try{
             Producto result;
@@ -31,14 +31,12 @@ public class VentaServlet extends HttpServlet {
             result = ProductoDAO.getProductoWithUPC(UPC);
             double total = venta.getTotal();
             total += result.getPrecio();
-            total = Utils.round(total,2);
             venta.setTotal(total);
             venta.getProductos().add(result);
-            request.getSession().removeAttribute("venta");
             request.getSession().setAttribute("venta",venta);
+            request.setAttribute("total",venta.getTotal());
             request.setAttribute("producto",result);
-            int count = venta.getProductos().size();
-            request.setAttribute("count",count);
+
             request.getRequestDispatcher("templates/Venta/product.jsp").forward(request,response);
         }catch(NumberFormatException nfe){
             List<Producto> result;
