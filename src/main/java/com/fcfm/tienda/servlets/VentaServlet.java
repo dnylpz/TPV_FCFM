@@ -2,6 +2,7 @@ package com.fcfm.tienda.servlets;
 
 import com.fcfm.tienda.models.Detalle;
 import com.fcfm.tienda.models.Producto;
+import com.fcfm.tienda.models.Usuario;
 import com.fcfm.tienda.services.ProductoDAO;
 import com.fcfm.tienda.utils.Utils;
 
@@ -24,6 +25,8 @@ public class VentaServlet extends HttpServlet {
         Detalle venta = (Detalle) request.getSession().getAttribute("venta");
         if(venta == null){
             venta = new Detalle();
+            Usuario a = (Usuario)request.getSession().getAttribute("user");
+            venta.setUsuario(a);
         }
         try{
             Producto result;

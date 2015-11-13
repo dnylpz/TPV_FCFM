@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Detalle {
     private int id;
-    //TODO private FormaDePago formaDePago;
+    private FormaDePago formaDePago;
     //TODO private List<Impuesto> impuestos;
     //TODO private List<Promociones> promociones;
     private Usuario usuario;
@@ -21,10 +21,19 @@ public class Detalle {
     private double total;
 
 
+
     public Detalle() {
         this.productos = new ArrayList<Producto>();
         this.fecha = new Date();
         this.hora = new LocalTime();
+    }
+
+    public FormaDePago getFormaDePago() {
+        return formaDePago;
+    }
+
+    public void setFormaDePago(FormaDePago formaDePago) {
+        this.formaDePago = formaDePago;
     }
 
     public double getTotal() {
@@ -73,5 +82,18 @@ public class Detalle {
 
     public void setHora(LocalTime hora) {
         this.hora = hora;
+    }
+
+    @Override
+    public String toString() {
+        return "Detalle{" +
+                "id=" + id +
+                ", formaDePago=" + formaDePago +
+                ", usuario=" + usuario +
+                ", productos=" + productos +
+                ", fecha=" + fecha +
+                ", hora=" + hora +
+                ", total=" + total +
+                '}';
     }
 }

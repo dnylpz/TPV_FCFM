@@ -44,8 +44,14 @@ $(document).ready(function(){
     });
     $("#closeSale").on("click",function(e){
         e.preventDefault();
-        $.post("metododepago",{},function(response){
+        $.post("formadepago",{},function(response){
             $(".metodos").html(response);
+            $(".main").addClass("inactive");
+        });
+        $("#fpago").on("submit",function(e){
+            e.preventDefault();
+            alert("Usted ha completado una venta");
+            $(this).submit();
         });
     });
 });
