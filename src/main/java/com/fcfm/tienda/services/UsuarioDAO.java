@@ -162,19 +162,19 @@ public class UsuarioDAO {
                 PreparedStatement stmt = conn.prepareStatement("call updateusuario(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 stmt.setInt(1,act.getIdUsuario());
                 stmt.setString(2,act.getLoginUsuario());
-                stmt.setString(3,act.getNombreUsuario());
-                stmt.setString(4,act.getApellidoUsuario());
-                stmt.setString(5,act.getPasswordUsuario());
+                stmt.setString(3,act.getPasswordUsuario());
                 if(act.getFotoUsuario() != null){
-                    stmt.setInt(6,act.getFotoUsuario().getIdImagen());
+                    stmt.setInt(4,act.getFotoUsuario().getIdImagen());
                 } else{
                     if(ant.getFotoUsuario() != null) {
-                        stmt.setInt(6, ant.getFotoUsuario().getIdImagen());
+                        stmt.setInt(4, ant.getFotoUsuario().getIdImagen());
                     }else{
-                        stmt.setNull(6,0);
+                        stmt.setNull(4,0);
                     }
                 }
-                stmt.setBoolean(7,act.isAdministrador());
+                stmt.setBoolean(5,act.isAdministrador());
+                stmt.setString(6,act.getNombreUsuario());
+                stmt.setString(7,act.getApellidoUsuario());
                 stmt.setBoolean(8,act.isSexo());
                 Date sqlDate = new Date(act.getFechaNacimiento().getTime());
                 stmt.setDate(9,sqlDate);

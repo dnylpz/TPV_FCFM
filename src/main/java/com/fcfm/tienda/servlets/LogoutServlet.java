@@ -10,10 +10,12 @@ import java.io.IOException;
 /**
  * Created by dany on 11/13/2015.
  */
-@WebServlet(name = "LogoutServlet")
+@WebServlet(name = "LogoutServlet",
+            urlPatterns = "/logout")
 public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getSession().invalidate();
+        request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

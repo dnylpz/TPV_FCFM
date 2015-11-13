@@ -84,7 +84,7 @@ public class UsersServlet extends HttpServlet {
 
             usrImg = ImagenDAO.parseImage(fotoPart); //generates BLOB, construct and save an image
 
-            if (request.getParameter("servicio").equals("Editar")) {
+            if (request.getParameter("servicio").equals("editar")) {
                 if (UsuarioDAO.updateUsuario(idUser, username, nombre, apellido, password, usrImg, admin,sex,fNacimiento,nDEstudios,dir,RFC,CURP)) {
                     request.getRequestDispatcher("/admon.jsp").forward(request, response);
                 } else {

@@ -32,7 +32,7 @@
                     </div>
                     <div class="two colums" >
                         <a href="venta.jsp" class="button"><p>ir a venta</p></a>
-                        <a class="button" href="index.jsp"><p>Salir</p></a>
+                        <a class="button" href="logout"><p>Salir</p></a>
                     </div>
                 </div>
             </div>

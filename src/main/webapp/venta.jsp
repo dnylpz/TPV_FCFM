@@ -36,7 +36,7 @@
                     <% if(user.isAdministrador()){%>
                         <a class="button" href="./login" ><p>Ir a admin</p></a>
                     <%}%>
-                <a class="button" href="index.jsp"><p>Salir</p></a>
+                <a class="button" href="logout"><p>Salir</p></a>
                 </div>
             </div>
         </div>
