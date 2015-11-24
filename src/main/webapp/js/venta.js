@@ -3,7 +3,6 @@
  */
 
 $(document).ready(function(){
-    var count = 0;
     console.log($(".addform").children("#addproduct"));
     $(".addform").on("submit","#addproduct",function(e){
         e.preventDefault();
@@ -11,7 +10,6 @@ $(document).ready(function(){
         console.log($("#articulo").val());
         var articulo = $("#articulo").val();
         $.post("agregaproducto",{articulo:articulo},function(response){
-            count++;
             console.log(response);
             $("#product-list").append(response);
             var selector = ".totalIn";
@@ -23,6 +21,11 @@ $(document).ready(function(){
                     var htm = "<h2 class='three columns'> $" + total + "</h2>"
                     $("#totalOut").children().remove();
                     $("#totalOut").html(htm);
+                    $(".removeItem").on("click",function(event){
+                        $(this).parent().parent().remove();
+                        var idx = $(this).attr("id");
+                        $.post("removeIt",{index:idx});
+                    });
                 }else{
                     $(".product").last().remove();
                     alert("Producto agotado");

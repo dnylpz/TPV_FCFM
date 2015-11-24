@@ -17,9 +17,9 @@
         display:none;
     }
 </style>
-<div class="product row hidden">
+<div class="product row hidden " >
     <div class="remove-item-area one column">
-        <a href="#" id="removeItem"><p>X</p></a>
+        <a href="#" class="removeItem" id="${count}"><p>X</p></a>
     </div>
     <div class="two columns product-image">
         <img src="${pageContext.request.contextPath}/imagen?id=${producto.getImagen().getIdImagen()}" alt="producto"/>

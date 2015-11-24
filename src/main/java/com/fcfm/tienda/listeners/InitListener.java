@@ -3,6 +3,7 @@ package com.fcfm.tienda.listeners; /**
  */
 
 import com.fcfm.tienda.models.Empresa;
+import com.fcfm.tienda.models.Video;
 import com.fcfm.tienda.services.ConnectionFactory;
 import com.fcfm.tienda.services.EmpresaDAO;
 
@@ -35,6 +36,7 @@ public class InitListener implements ServletContextListener,
         ConnectionFactory.setServletContex(sc);
         Empresa emp  = EmpresaDAO.empresaFactory();
         sc.setAttribute("empresa",emp);
+        sc.setAttribute("vidDef",new Video("vid1.mp4",null));
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

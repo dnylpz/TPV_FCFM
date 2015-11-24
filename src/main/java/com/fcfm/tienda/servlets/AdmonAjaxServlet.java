@@ -52,6 +52,9 @@ public class AdmonAjaxServlet extends HttpServlet {
         if(to.equals("Reporte")){
             request.getRequestDispatcher("templates/admin/reporte.jsp").forward(request,response);
         }
+        if(to.equals("editCashier")){
+            request.getRequestDispatcher("templates/admin/pickVideo.jsp").forward(request,response);
+        }
 
     }
 

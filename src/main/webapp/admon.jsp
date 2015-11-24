@@ -59,7 +59,6 @@
                   <div class="six columns">
                     <h3>Cajas</h3>
                       <a href="#" class="button ajx-btn" id="editCashier">Editar Caja</a>
-                      <a href="#" class="button ajx-btn" id="addPromo">Agregar Promocion</a>
                   </div>
                   <div class="six columns">
                     <h3>Reportes</h3>
