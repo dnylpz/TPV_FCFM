@@ -18,12 +18,13 @@ public class DetalleDAO {
     public static boolean saveDetalle(Detalle a){
         try{
             conn = ds.getConnection();
-            stmt = conn.prepareStatement("call savedetalle(?,?,?,?)");
+            stmt = conn.prepareStatement("call savedetalle(?,?,?,?,?)");
             Date fech = new Date(a.getFecha().getTime());
             stmt.setInt(1, a.getFormaDePago().getId());
             stmt.setInt(2,a.getUsuario().getIdUsuario());
             stmt.setDate(3, fech);
             stmt.setDouble(4,a.getTotal());
+            stmt.setTime(5,new java.sql.Time(a.getHora().toDateTimeToday().getMillis()));
             rs = stmt.executeQuery();
             while(rs.next()){
                 a.setId(rs.getInt(1));

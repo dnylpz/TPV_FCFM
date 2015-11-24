@@ -19,17 +19,7 @@ import java.io.IOException;
             urlPatterns = "/formadepago")
 public class PagosServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("formadepago") != null){
-            int pagoId = Integer.parseInt(request.getParameter("formadepago"));
-            FormaDePago pago = FormaDePagoDAO.getMetodoDePago(pagoId);
-            Detalle ticket = (Detalle)request.getSession().getAttribute("venta");
-            ticket.setFormaDePago(pago);
-            DetalleDAO.saveDetalle(ticket);
-            request.getSession().removeAttribute("venta");
-            request.getRequestDispatcher("venta.jsp").forward(request, response);
-        }else{
             request.getRequestDispatcher("templates/Venta/formadepago.jsp").forward(request,response);
-        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

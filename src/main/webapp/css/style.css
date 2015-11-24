@@ -37,8 +37,8 @@
     background-color: #e7e7e7;
     padding:2em 2em 0 2em;
     float:left;
-    width:70.55%;
-    height:40em;
+    width:65.55%;
+    height:43em;
 
 }
 .products p{
@@ -54,8 +54,8 @@
     background-color:yellow;
     text-align: center;
     float:right;
-    width:25%;
-    height:40em;
+    width:30%;
+    height:43em;
 }
 .circle{
   border-radius:100px;
@@ -98,7 +98,7 @@
     width:100%;
     background-color: #355ba3;
     color:white;
-    padding-top:2em;
+    padding-top:5em;
 }
 .footer-content{
     padding:1.5em;
@@ -109,10 +109,6 @@
 .body-content{
     padding-top:3em;
 }
-
-#addusr{
-
-}
 .butt-cont{
     padding-left:25%;
     padding-right:25%;
@@ -121,4 +117,7 @@
 }
 .scrolleable{
     overflow-y: auto;
+}
+.inactive{
+
 }

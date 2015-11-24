@@ -26,7 +26,7 @@
       <th>UPC</th>
       <th>Precio</th>
       <th>Existencia</th>
-      <% if(request.getAttribute("venta").equals("esVenta")){%>
+      <% if((boolean)request.getAttribute("venta")){%>
         <th>Agregar</th>
       <%}else{%>
         <th>Editar</th>
@@ -42,13 +42,12 @@
         <td>${x.getUPC()}</td>
         <td>${x.getPrecio()}</td>
         <td>${x.getExistencia()}</td>
-        <%if(request.getAttribute("venta").equals("esVenta")){%>
+        <%if((boolean)request.getAttribute("venta")){%>
           <td><a href="#" class="button add" itemId="${x.getUPC()}">Agregar</a></td>
         <%}else{%>
           <td><a href="#" class="button edit"  action="adminajax" servicio="doEditProduct" itemId="${x.getIdProducto()}">Editar</a></td>
-          <td><<a href="#" class="button delete"  action="serveproductos" itemType="Producto" style="background-color:red; color:white;"  itemId="${x.getIdProducto()}">Borrar</a></td>
+          <td><a href="#" class="button delete"  action="serveproductos" itemType="Producto" style="background-color:red; color:white;"  itemId="${x.getIdProducto()}">Borrar</a></td>
         <%}%>
-
       </tr>
     </c:forEach>
     </tbody>

@@ -11,6 +11,17 @@ $(document).ready(function(){
             if($("#datePicker").length){
                 $("#datePicker").datepicker();
             }
+            if($(".datePicker").length){
+              $(".datePicker").datepicker();
+                $(".popup").on("submit","form",function(ev){
+                    console.log("submitev trigg");
+                    ev.preventDefault();
+                    $.post("reporte",{inic: $("#fInic").val(), fin: $("#fFin").val()},function(response){
+                        console.log(response);
+                        $(".reporteResults").html(response);
+                    });
+                });
+            }
             $(".popup").on('click','#cerrar',function(event){
                 console.log("clicked!");
                 $(".popup").children().remove();
@@ -19,5 +30,3 @@ $(document).ready(function(){
         });
     });
 });
-
-

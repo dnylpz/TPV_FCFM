@@ -11,6 +11,7 @@ $(document).ready(function(){
             console.log(response);
             $(".resultList").children().remove();
             $(".resultList").html(response);
+            $(".content").removeClass("hidden");
         });
         return false;
     });

@@ -32,6 +32,7 @@ public class SearchServlet extends HttpServlet {
             List<Producto> resultado;
             resultado = ProductoDAO.buscaProducto(param);
             request.setAttribute("resultado", resultado);
+            request.setAttribute("venta",false);
             request.getRequestDispatcher("templates/search/productlist.jsp").forward(request,response);
         }
 

@@ -1,5 +1,7 @@
 package com.fcfm.tienda.models;
 
+import java.util.List;
+
 /**
  * Created by jose.espinoza.lopez on 11/9/2015.
  */
@@ -11,8 +13,14 @@ public class Producto {
     private Imagen imagen;
     private double  precio;
     private int existencia;
+    private String departamento;
+    private String uMedida;
+    private List<Promocion> promociones;
+    private float impuesto;
 
-    public Producto(int idProducto, String nombre, String descripcion, long UPC, Imagen imagen, double precio, int existencia) {
+    public Producto(int idProducto, String nombre, String descripcion, long UPC,
+                    Imagen imagen, double precio, int existencia, String departamento,
+                    String uMedida, List<Promocion> promociones, float impuesto) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -20,6 +28,43 @@ public class Producto {
         this.imagen = imagen;
         this.precio = precio;
         this.existencia = existencia;
+        this.departamento = departamento;
+        this.uMedida = uMedida;
+        this.promociones = promociones;
+        this.impuesto = impuesto;
+    }
+
+
+    public List<Promocion> getPromociones() {
+        return promociones;
+    }
+
+    public void setPromociones(List<Promocion> promociones) {
+        this.promociones = promociones;
+    }
+
+    public float getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(float impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getuMedida() {
+        return uMedida;
+    }
+
+    public void setuMedida(String uMedida) {
+        this.uMedida = uMedida;
     }
 
     @Override

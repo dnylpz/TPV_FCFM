@@ -11,17 +11,22 @@ $(document).ready(function(){
         console.log($("#articulo").val());
         var articulo = $("#articulo").val();
         $.post("agregaproducto",{articulo:articulo},function(response){
-
             count++;
             console.log(response);
             $("#product-list").append(response);
-            var selector = "#totalIn"+count;
-            var total = $(selector).val();
+            var selector = ".totalIn";
+            var total = $(selector).last().val();
             if(total!=null) {
-                $(".product").removeClass("hidden");
-                var htm = "<h2 class='three columns'> $" + total + "</h2>"
-                $("#totalOut").children().remove();
-                $("#totalOut").html(htm);
+                var exists =$(".stillExists").last().val();
+                if(exists != "false") {
+                    $(".product").removeClass("hidden");
+                    var htm = "<h2 class='three columns'> $" + total + "</h2>"
+                    $("#totalOut").children().remove();
+                    $("#totalOut").html(htm);
+                }else{
+                    $(".product").last().remove();
+                    alert("Producto agotado");
+                }
             }else{
                 $("#product-list").children(".sResults").remove();
                 $(".resultlist").html(response);
@@ -31,12 +36,17 @@ $(document).ready(function(){
                     $(".resultlist").children().remove();
                     $.post("agregaproducto",{articulo:upc},function(res){
                         $("#product-list").append(res);
-                        var selector = "#totalIn"+count;
-                        var total = $(selector).val();
-                        $(".product").removeClass("hidden");
-                        var htm = "<h2 class='three columns'> $" + total + "</h2>"
-                        $("#totalOut").children().remove();
-                        $("#totalOut").html(htm);
+                        var total = $("totalIn").last().val();
+                        if($(".stillExists").last().val() != "false") {
+                            $(".product").removeClass("hidden");
+                            var htm = "<h2 class='three columns'> $" + total + "</h2>"
+                            $("#totalOut").children().remove();
+                            $("#totalOut").html(htm);
+                        }else{
+                            $(".product").last().remove();
+                            alert("Producto agotado");
+                        }
+
                     });
                 });
             }
@@ -46,10 +56,11 @@ $(document).ready(function(){
         e.preventDefault();
         $.post("formadepago",{},function(response){
             $(".metodos").html(response);
-            $(".main").addClass("inactive");
+            $(".main").children().addClass("inactive");
         });
-        $("#fpago").on("submit",function(e){
+        $(".main").on("submit","#fpago",function(e){
             e.preventDefault();
+            $(".main").fadeIn(300);
             alert("Usted ha completado una venta");
             $(this).submit();
         });

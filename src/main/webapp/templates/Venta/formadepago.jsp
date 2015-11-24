@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="content">
-      <form class="six columns offset-by-three" action="formadepago" id="fpago" method="post">
+      <form class="six columns offset-by-three" action="pagar" id="fpago" method="post">
         <div class="row">
           <input type="radio" name="formadepago" value="1" class="three columns"/> Efectivo
         </div>

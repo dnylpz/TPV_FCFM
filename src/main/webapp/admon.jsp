@@ -32,7 +32,7 @@
                     </div>
                     <div class="two colums" >
                         <a href="venta.jsp" class="button"><p>ir a venta</p></a>
-                        <a class="button" href="logout"><p>Salir</p></a>
+                        <a class="button" href="/logout"><p>Salir</p></a>
                     </div>
                 </div>
             </div>
@@ -59,13 +59,11 @@
                   <div class="six columns">
                     <h3>Cajas</h3>
                       <a href="#" class="button ajx-btn" id="editCashier">Editar Caja</a>
+                      <a href="#" class="button ajx-btn" id="addPromo">Agregar Promocion</a>
                   </div>
                   <div class="six columns">
                     <h3>Reportes</h3>
-                      <a href="#" class="button ajx-btn" id="hourlyReport">Reporte de Hora</a>
-                      <a href="#" class="button ajx-btn" id="shiftReport">Reporte de Turno</a>
-                      <a href="#" class="button ajx-btn" id="dailyReport">Reporte de Dia</a>
-                      <a href="#" class="button ajx-btn " id="weekleReport">Reporte de Semana</a>
+                      <a href="#" class="button ajx-btn" id="Reporte">Reporte</a>
                   </div>
                 </div>
             </div>

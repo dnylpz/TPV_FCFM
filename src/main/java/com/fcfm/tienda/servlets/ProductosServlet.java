@@ -34,6 +34,9 @@ public class ProductosServlet extends HttpServlet {
             double precio;
             Imagen prImg;
             int existencia;
+            String depto;
+            String uMedida;
+            int impuesto;
 
             nombre = request.getParameter("nombre");
             descripcion = request.getParameter("descripcion");
@@ -42,12 +45,15 @@ public class ProductosServlet extends HttpServlet {
             precio = Double.parseDouble(request.getParameter("precio"));
             existencia = Integer.parseInt(request.getParameter("existencia"));
             prImg = ImagenDAO.parseImage(imagen);
+            depto = request.getParameter("depto");
+            uMedida = request.getParameter("uMedida");
+            impuesto = Integer.parseInt(request.getParameter("impuesto"));
             if (servicio.equals("editar")) {
                 int idProducto = Integer.parseInt(request.getParameter("idProducto"));
                 ProductoDAO.updateProducto(idProducto, nombre, descripcion,
-                        UPC, prImg, precio, existencia);
+                        UPC, prImg, precio, existencia,depto,uMedida,impuesto);
             } else {
-                ProductoDAO.agregarProducto(nombre, descripcion, UPC, prImg, precio, existencia);
+                ProductoDAO.agregarProducto(nombre, descripcion, UPC, prImg, precio, existencia,depto,uMedida,impuesto);
             }
         }
         request.getRequestDispatcher("/admon.jsp").forward(request,response);

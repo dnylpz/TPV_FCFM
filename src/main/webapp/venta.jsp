@@ -36,7 +36,7 @@
                     <% if(user.isAdministrador()){%>
                         <a class="button" href="./login" ><p>Ir a admin</p></a>
                     <%}%>
-                <a class="button" href="logout"><p>Salir</p></a>
+                <a class="button" href="/logout"><p>Salir</p></a>
                 </div>
             </div>
         </div>
@@ -69,7 +69,10 @@
                     </form>
                 </div>
                 <div class="row">
-                    <img class="video" src="img/video_placeholder.jpg" alt="video"  height="100px" width="150px"/>
+                    <video height="240px" width="320px" loop autoplay muted>
+                        <source src="videos/Nuevo Comercial Papas Sabritas 2015.mp4" type="video/mp4" >
+                        browser not allowing video to play
+                    </video>
                 </div>
             </div>
         </div>

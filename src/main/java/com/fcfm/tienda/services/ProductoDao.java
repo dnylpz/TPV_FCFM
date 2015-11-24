@@ -14,17 +14,23 @@ import java.util.List;
 /**
  * Created by jose.espinoza.lopez on 11/9/2015.
  */
+
+
+
+
 public class ProductoDAO {
     private static final MysqlDataSource ds = ConnectionFactory.getDataSource();
     private static Connection conn = null;
     private static PreparedStatement stmt = null;
     private static ResultSet rs = null;
 
-    public static boolean agregarProducto(String nombre, String descripcion, long UPC, Imagen imagen, double precio, int existencia) {
+
+    public static boolean agregarProducto(String nombre, String descripcion, long UPC, Imagen imagen, double precio, int existencia,String depto,
+                                          String uMedida, float impuesto) {
         Producto nuevo;
         try {
             conn = ds.getConnection();
-            stmt = conn.prepareStatement("CALL saveproducto(?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("CALL saveproducto(?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, nombre);
             stmt.setString(2, descripcion);
             stmt.setLong(3, UPC);
@@ -35,6 +41,9 @@ public class ProductoDAO {
             }
             stmt.setDouble(5, precio);
             stmt.setInt(6, existencia);
+            stmt.setString(7,depto);
+            stmt.setString(8,uMedida);
+            stmt.setFloat(9,impuesto);
             stmt.execute();
             nuevo = getProductoWithUPC(UPC);
             if (nuevo != null) {
@@ -59,7 +68,8 @@ public class ProductoDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Imagen primg = ImagenDAO.getImagen(rs.getInt(5));
-                nuevo = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7));
+                nuevo = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7),
+                        rs.getString(8),rs.getString(9),PromocionDAO.getPromociones(rs.getInt(1)),rs.getInt(10));
                 conn.close();
                 stmt.close();
                 rs.close();
@@ -82,7 +92,8 @@ public class ProductoDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 primg = ImagenDAO.getImagen(rs.getInt(5));
-                p = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7));
+                p = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7),rs.getString(8),
+                        rs.getString(9),PromocionDAO.getPromociones(rs.getInt(1)),rs.getInt(10));
                 result.add(p);
             }
             rs.close();
@@ -103,7 +114,8 @@ public class ProductoDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Imagen primg = ImagenDAO.getImagen(rs.getInt(5));
-                nuevo = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7));
+                nuevo = new Producto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getLong(4), primg, rs.getDouble(6), rs.getInt(7),
+                        rs.getString(8),rs.getString(9),PromocionDAO.getPromociones(rs.getInt(1)),rs.getInt(10));
                 conn.close();
                 stmt.close();
                 rs.close();
@@ -115,15 +127,17 @@ public class ProductoDAO {
         return null;
     }
 
-    public static boolean updateProducto(int id,String nombre, String descripcion, long UPC, Imagen img, double precio, int existencia) {
+    //TODO add parameters to the prepared statement
+    public static boolean updateProducto(int id,String nombre, String descripcion, long UPC, Imagen img, double precio, int existencia,
+                                         String depto, String uMedida, float impuesto) {
         Producto ant = getProductoWithId(id);
-        Producto nuev = new Producto(id,nombre,descripcion,UPC,img,precio,existencia);
+        Producto nuev = new Producto(id,nombre,descripcion,UPC,img,precio,existencia,depto,uMedida,null,impuesto);
         if(ant.equals(nuev)){
             return false;
         }else{
             try {
                 conn = ds.getConnection();
-                stmt = conn.prepareStatement("call updateproducto(?,?,?,?,?,?,?)");
+                stmt = conn.prepareStatement("call updateproducto(?,?,?,?,?,?,?,?,?,?)");
                 stmt.setInt(1, nuev.getIdProducto());
                 stmt.setString(2,nuev.getNombre());
                 stmt.setString(3,nuev.getDescripcion());
@@ -139,6 +153,17 @@ public class ProductoDAO {
                 }
                 stmt.setDouble(6,nuev.getPrecio());
                 stmt.setInt(7,nuev.getExistencia());
+                if(nuev.getDepartamento()!= null){
+                    stmt.setString(8,nuev.getDepartamento());
+                }else{
+                    stmt.setString(8,ant.getDepartamento());
+                }
+                if (nuev.getuMedida() != null) {
+                    stmt.setString(9,nuev.getuMedida());
+                }else{
+                    stmt.setString(9,ant.getuMedida());
+                }
+                stmt.setFloat(10,nuev.getImpuesto());
                 stmt.execute();
                 stmt.close();
                 ant = getProductoWithId(id);

@@ -2,6 +2,7 @@ package com.fcfm.tienda.servlets;
 
 import com.fcfm.tienda.models.Detalle;
 import com.fcfm.tienda.models.Producto;
+import com.fcfm.tienda.models.Promocion;
 import com.fcfm.tienda.models.Usuario;
 import com.fcfm.tienda.services.ProductoDAO;
 import com.fcfm.tienda.utils.Utils;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,20 +34,49 @@ public class VentaServlet extends HttpServlet {
             Producto result;
             long UPC = Long.parseLong(articulo);
             result = ProductoDAO.getProductoWithUPC(UPC);
-            double total = venta.getTotal();
-            total += result.getPrecio();
-            total = Utils.round(total,2);
-            venta.setTotal(total);
-            venta.getProductos().add(result);
-            request.getSession().setAttribute("venta",venta);
-            request.setAttribute("producto",result);
-            request.setAttribute("count",venta.getProductos().size());
+            int counter=0;
+            for(Producto x : venta.getProductos()){
+                if(x.equals(result)){
+                    counter++;
+                }
+            }
+            if(result.getExistencia()>counter) {
+                double total = venta.getTotal();
+                float porciento = result.getImpuesto()/100;
+                double precio = result.getPrecio()+(result.getPrecio() * porciento);
+                total +=precio;
+                if (result.getPromociones()!= null) {
+                    for (Promocion a : result.getPromociones()) {
+                        if (a.getVigencia().before(new Date())) {
+                            if (a.getTipo().equals("porcentaje")) {
+                                double descuento = result.getPrecio()*(a.getValor()/100);
+                                total -= descuento;
+                            }
+                            if (a.getTipo().equals("dp1")) {
+                                if (counter % 2 != 0) {
+                                    total -= precio;
+                                }
+                            }
+                        }
+                    }
+                }
+                venta.getProductos().add(result);
+
+                venta.setTotal(Utils.round(total,2));
+                request.setAttribute("existe",true);
+            }else
+            {
+                request.setAttribute("existe",false);
+            }
+            request.setAttribute("producto", result);
+            request.getSession().setAttribute("venta", venta);
+            request.setAttribute("count", venta.getProductos().size());
             request.getRequestDispatcher("templates/Venta/product.jsp").forward(request,response);
         }catch(NumberFormatException nfe){
             List<Producto> result;
             result = ProductoDAO.buscaProducto(articulo);
             request.setAttribute("resultado",result);
-            request.setAttribute("venta","esVenta");
+            request.setAttribute("venta",true);
             request.getRequestDispatcher("templates/search/productlist.jsp").forward(request,response);
         }
 

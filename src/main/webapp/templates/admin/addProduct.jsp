@@ -42,6 +42,28 @@
           <label>Existencias</label>
           <input type="number" name="existencia" value="${producto.getExistencia()}" required>
         </div>
+        <div class="three columns offset-by-one">
+          <label>Departamento</label>
+          <select name="depto" class="three columns" required>
+            <option value="Electronica">Electronica</option>
+            <option value="Carnes_frias">Carnes Frias</option>
+            <option value="Higiene">Higiene</option>
+            <option value="Accesorios">Accesorios</option>
+          </select>
+        </div>
+        <div class="three columns offset-by-one">
+          <label>Tipo de unidad</label>
+          <select name="uMedida" class="three columns" required>
+            <option value="Unidad">Unidad</option>
+            <option value="Peso">Kilogramos</option>
+            <option value="Litros">Litros</option>
+            <option value="Paquete">Paquete</option>
+          </select>
+        </div>
+        <div class="three columns offset-by-one">
+          <label>Impuesto</label>
+          <input type="number" name="impuesto" value="${producto.getImpuesto()}" required>
+        </div>
         <div class="three columns offset-by-two">
           <input type="hidden" name="servicio" value="${action}">
           <input type="hidden" name="idProducto" value="${producto.getIdProducto()}">
