@@ -94,18 +94,8 @@
                 <div id="totalOut"></div>
                 <a href="#" id="closeSale" class="two columns button">Pagar</a>
             </div>
-            <div class="row">
-                <div class="two columns">
-                    <img src="" alt="cliente"/>
-                </div>
-                <div class="four columns">
-                    <p>
-                        No Cliente:00000
-                        Nombre: Juan Martinez
-                        Puntos: 09923
-                    </p>
-                </div>
-            </div>
+
+           
         </div>
     </div>
 </div>

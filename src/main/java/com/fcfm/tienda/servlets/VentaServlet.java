@@ -47,14 +47,17 @@ public class VentaServlet extends HttpServlet {
                 total +=precio;
                 if (result.getPromociones()!= null) {
                     for (Promocion a : result.getPromociones()) {
-                        if (a.getVigencia().before(new Date())) {
+                        if (a.getVigencia().after(new Date())) {
                             if (a.getTipo().equals("porcentaje")) {
                                 double descuento = result.getPrecio()*(a.getValor()/100);
                                 total -= descuento;
+                                precio -= descuento;
                             }
-                            if (a.getTipo().equals("dp1")) {
-                                if (counter % 2 != 0) {
+                            if (a.getTipo().equals("combo")) {
+                                float val = (counter+1) % a.getValor();
+                                if (val == 0) {
                                     total -= precio;
+                                    precio -= precio;
                                 }
                             }
                         }
@@ -64,6 +67,7 @@ public class VentaServlet extends HttpServlet {
 
                 venta.setTotal(Utils.round(total,2));
                 request.setAttribute("existe",true);
+                request.setAttribute("precio",precio);
             }else
             {
                 request.setAttribute("existe",false);
@@ -71,6 +75,7 @@ public class VentaServlet extends HttpServlet {
             request.setAttribute("producto", result);
             request.getSession().setAttribute("venta", venta);
             request.setAttribute("count", venta.getProductos().size());
+
             request.getRequestDispatcher("templates/Venta/product.jsp").forward(request,response);
         }catch(NumberFormatException nfe){
             List<Producto> result;

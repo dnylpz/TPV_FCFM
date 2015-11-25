@@ -31,6 +31,7 @@
       <%}else{%>
         <th>Editar</th>
         <th>Borrar</th>
+        <th>Agregar Promocion</th>
       <%}%>
     </tr>
     </thead>
@@ -47,6 +48,7 @@
         <%}else{%>
           <td><a href="#" class="button edit"  action="adminajax" servicio="doEditProduct" itemId="${x.getIdProducto()}">Editar</a></td>
           <td><a href="#" class="button delete"  action="serveproductos" itemType="Producto" style="background-color:red; color:white;"  itemId="${x.getIdProducto()}">Borrar</a></td>
+          <td><a href="#" class="button addpromo" action="adminajax" servicio="addPromo" itemId="${x.getIdProducto()}">Agregar promocion</a></td>
         <%}%>
       </tr>
     </c:forEach>

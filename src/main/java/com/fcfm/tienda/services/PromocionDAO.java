@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,5 +38,20 @@ public class PromocionDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean savePromo(String tipoPromo, float valorPromo, Date vigencia, int prodId) {
+        try{
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement("CALL savePromocion(?,?,?,?)");
+            stmt.setString(1,tipoPromo);
+            stmt.setFloat(2,valorPromo);
+            stmt.setDate(3,new java.sql.Date(vigencia.getTime()));
+            stmt.setInt(4,prodId);
+            stmt.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }

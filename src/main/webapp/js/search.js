@@ -41,4 +41,20 @@ $(document).ready(function(){
             });
         }
     });
+    $(".popup").on("click",".addpromo",function(e){
+        e.preventDefault();
+        var itId = $(this).attr("itemId");
+        var action = $(this).attr("action");
+        var serv = $(this).attr("servicio")
+        $.post(action,{itemId:itId, servicio:"addPromo", to:serv}, function(response){
+            console.log(response);
+            $(".popup").children().remove();
+            $(".popup").html(response);
+            $(".datePicker").datepicker();
+            $(".popup").on("submit","#addpromo",function(ev){
+                aler("promocion guardada");
+                $(this).submit();
+            });
+        });
+    });
 });

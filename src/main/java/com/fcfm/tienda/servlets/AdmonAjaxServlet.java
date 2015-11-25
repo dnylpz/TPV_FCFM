@@ -49,6 +49,10 @@ public class AdmonAjaxServlet extends HttpServlet {
             request.setAttribute("producto", ProductoDAO.getProductoWithId(Integer.parseInt(request.getParameter("itemId"))));
             request.getRequestDispatcher("templates/admin/addProduct.jsp").forward(request,response);
         }
+        if(to.equals("addPromo")){
+            request.setAttribute("producto",ProductoDAO.getProductoWithId(Integer.parseInt(request.getParameter("itemId"))));
+            request.getRequestDispatcher("templates/admin/addPromo.jsp").forward(request,response);
+        }
         if(to.equals("Reporte")){
             request.getRequestDispatcher("templates/admin/reporte.jsp").forward(request,response);
         }

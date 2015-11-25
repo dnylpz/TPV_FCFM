@@ -41,6 +41,7 @@ public class LoginServlet extends HttpServlet {
         }
         if(!forwarded) {
             if (ses != null && ses.isAdministrador()) {
+                request.getSession().removeAttribute("venta");
                 request.getRequestDispatcher("/admon.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/venta.jsp").forward(request, response);
