@@ -1,6 +1,10 @@
 <%@ page import="com.fcfm.tienda.models.Usuario" %>
 <%@ page import="com.fcfm.tienda.models.Video" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.nio.file.Files" %>
+<%@ page import="java.nio.file.Paths" %>
+<%@ page import="java.nio.file.Path" %>
+<%@ page import="java.io.File" %>
 <%--
   Created by IntelliJ IDEA.
   User: dany
@@ -26,7 +30,11 @@
         Video vid;
         Video set = (Video) request.getServletContext().getAttribute("vidDef");;
         vid = (Video)request.getServletContext().getAttribute("vid");
-        if(vid!= null){
+        String basePath = request.getServletContext().getRealPath("/videos");
+        String vidPath = basePath+vid.getPath();
+        File f = new File(vidPath);
+        Boolean a = f.isFile();
+        if(vid!= null && vid.getId() > 1 && a ){
             if(vid.getVigencia().after(new Date())){
                 set = vid;
             }
@@ -80,7 +88,7 @@
                 </div>
                 <div class="row">
                     <video height="240px" width="320px" loop autoplay muted>
-                        <source src="videos/<%=set.getPath()%>" type="video/mp4" >
+                        <source src="<%=set.getPath()%>" type="<%=set.getTipo()%>" >
                         browser not allowing video to play
                     </video>
                 </div>
@@ -94,8 +102,6 @@
                 <div id="totalOut"></div>
                 <a href="#" id="closeSale" class="two columns button">Pagar</a>
             </div>
-
-           
         </div>
     </div>
 </div>

@@ -26,7 +26,6 @@ public class ConnectionFactory  {
         FileInputStream fis = null;
         MysqlDataSource mysqlDS= null;
         try{
-            // THIS LINE HAS TO BE CHANGED DEPENDING ON ENVIRONMENT
             String x =sc.getRealPath("/WEB-INF/classes/db.properties");
             fis = new FileInputStream(x);
            // fis = fis.getClass().getClassLoader().getResourceAsStream("db.properties");
