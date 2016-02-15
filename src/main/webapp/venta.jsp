@@ -30,12 +30,12 @@
         Video vid;
         Video set = (Video) request.getServletContext().getAttribute("vidDef");;
         vid = (Video)request.getServletContext().getAttribute("vid");
-        String basePath = request.getServletContext().getRealPath("/videos");
-        String vidPath = basePath+vid.getPath();
-        File f = new File(vidPath);
-        Boolean a = f.isFile();
-        if(vid!= null && vid.getId() > 1 && a ){
-            if(vid.getVigencia().after(new Date())){
+        if(vid!= null && vid.getId() > 1  ){
+            String basePath = request.getServletContext().getRealPath("/");
+            String vidPath = vid.getPath();
+            File f = new File(basePath+vidPath);
+            boolean a = f.isFile();
+            if(vid.getVigencia().after(new Date()) && a){
                 set = vid;
             }
         }
@@ -88,7 +88,7 @@
                 </div>
                 <div class="row">
                     <video height="240px" width="320px" loop autoplay muted>
-                        <source src="<%=set.getPath()%>" type="<%=set.getTipo()%>" >
+                        <source src="/<%=set.getPath()%>" type="<%=set.getTipo()%>" >
                         browser not allowing video to play
                     </video>
                 </div>

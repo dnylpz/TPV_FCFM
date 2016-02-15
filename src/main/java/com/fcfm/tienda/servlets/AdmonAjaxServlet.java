@@ -2,6 +2,7 @@ package com.fcfm.tienda.servlets;
 
 import com.fcfm.tienda.services.ProductoDAO;
 import com.fcfm.tienda.services.UsuarioDAO;
+import com.fcfm.tienda.services.VideoDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,7 +58,12 @@ public class AdmonAjaxServlet extends HttpServlet {
             request.getRequestDispatcher("templates/admin/reporte.jsp").forward(request,response);
         }
         if(to.equals("editCashier")){
+
             request.getRequestDispatcher("templates/admin/pickVideo.jsp").forward(request,response);
+        }
+        if(to.equals("editVideos")){
+            request.setAttribute("Videos",VideoDAO.getVideos());
+            request.getRequestDispatcher("templates/admin/confVids.jsp").forward(request,response);
         }
 
     }

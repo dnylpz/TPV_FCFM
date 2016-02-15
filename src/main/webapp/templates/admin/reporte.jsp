@@ -5,7 +5,7 @@
           <div class="closepop">
             <a href="#" id="cerrar" >X</a>
           </div>
-          <form action="reporte" method="post" class="container">
+          <form action="reporte" method="post" class="container" id="reporte">
             <div class="row">
               <label class="two columns">fecha de inicio</label>
               <input type="date" name="fInic"  id="fInic" class="three columns datePicker"/>

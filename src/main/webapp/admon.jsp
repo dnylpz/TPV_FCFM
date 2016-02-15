@@ -58,7 +58,8 @@
                 <div class="row">
                   <div class="six columns">
                     <h3>Cajas</h3>
-                      <a href="#" class="button ajx-btn" id="editCashier">Editar Caja</a>
+                      <a href="#" class="button ajx-btn" id="editCashier">Agregar Videos</a>
+                      <a href="#" class="button ajx-btn" id="editVideos">Elegir y programar videos</a>
                   </div>
                   <div class="six columns">
                     <h3>Reportes</h3>

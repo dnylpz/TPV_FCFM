@@ -35,7 +35,7 @@
             <h2 class="twelve rows">Acceso a usuarios</h2>
         </div>
         <div class="row">
-            <form class="twelve columns" method="post" action="./login">
+            <form class="twelve columns" method="post" action="login">
                 <div class="row">
                     <label class="four columns offset-by-four" >Nombre de usuario</label>
                 </div>

@@ -43,7 +43,7 @@
           <option value="M">M</option>
         </select>
         <label class="three columns">Fecha de nacimiento</label>
-        <input type="date" name="fNan" value="${fmtDate}" class="three columns" id="datePicker"/>
+        <input type="date" name="fNan" value="${fmtDate}" class="three columns datePicker"/>
       </div>
       <div class="row">
         <label class="three columns">Nivel de estudios</label>

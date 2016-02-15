@@ -44,7 +44,7 @@
         </div>
         <div class="three columns offset-by-one">
           <label>Departamento</label>
-          <select name="depto" class="three columns" required>
+          <select name="depto" class="twelve columns" required>
             <option value="Electronica">Electronica</option>
             <option value="Carnes_frias">Carnes Frias</option>
             <option value="Higiene">Higiene</option>
@@ -53,7 +53,7 @@
         </div>
         <div class="three columns offset-by-one">
           <label>Tipo de unidad</label>
-          <select name="uMedida" class="three columns" required>
+          <select name="uMedida" class="twelve columns" required>
             <option value="Unidad">Unidad</option>
             <option value="Peso">Kilogramos</option>
             <option value="Litros">Litros</option>

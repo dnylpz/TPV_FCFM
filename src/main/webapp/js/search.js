@@ -52,7 +52,7 @@ $(document).ready(function(){
             $(".popup").html(response);
             $(".datePicker").datepicker();
             $(".popup").on("submit","#addpromo",function(ev){
-                aler("promocion guardada");
+                alert("promocion guardada");
                 $(this).submit();
             });
         });

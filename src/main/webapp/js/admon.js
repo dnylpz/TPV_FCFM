@@ -9,16 +9,16 @@
             $('.content').addClass('inactive');
             console.log(response);
             $(".popup").html(response);
-            if($("#datePicker").length){
-                $("#datePicker").datepicker();
+            if($(".datePicker").length){
+                $(".datePicker").datepicker();
             }
             if($(".datePicker").length){
               $(".datePicker").datepicker();
-                if($(this).attr('id') == "reporte"){
+                if($("#reporte").length){
                 $(".popup").on("submit","form",function(ev){
                     console.log("submitev trigg");
                     ev.preventDefault();
-                    $.post("reporte",{inic: $("#fInic").val(), fin: $("#fFin").val()},function(response){
+                    $.post("reporte",{fInic: $("#fInic").val(), fFin: $("#fFin").val()},function(response){
                         console.log(response);
                         $(".reporteResults").html(response);
                     });

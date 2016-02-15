@@ -26,16 +26,18 @@ public class ReporteServlet extends HttpServlet {
         List<Reporte> r = new ArrayList<Reporte>();
         Date inic = new Date();
         Date fin = new Date();
+        String inics = request.getParameter("fInic");
+        String fins = request.getParameter("fFin");
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-            inic = sdf.parse(request.getParameter("inic"));
-            fin = sdf.parse(request.getParameter("fin"));
+            inic = sdf.parse(inics);
+            fin = sdf.parse(fins);
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
         r = ReporteDAO.getReporteFechas(inic, fin);
         request.setAttribute("reportes", r);
-        System.out.println(r.get(1).getHoraDetalle().toString("HH:mm"));
+        //System.out.println(r.get(0).getHoraDetalle().toString("HH:mm"));
         request.getRequestDispatcher("templates/admin/resultadosReporte.jsp").forward(request, response);
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

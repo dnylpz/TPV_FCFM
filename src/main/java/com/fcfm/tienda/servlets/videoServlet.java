@@ -56,9 +56,9 @@ public class videoServlet extends HttpServlet {
                 File b = new File(basePath + File.separator + fileName2);
                 Files.copy(is2, b.toPath());
                 String tipo = Files.probeContentType(b.toPath());
-                Video def = new Video(0, b.getName(), b.getPath(), null, tipo);
+                Video def = new Video(0, b.getName(),"/videos/"+fileName2, null, tipo);
                 VideoDAO.updateDefault(def);
-                request.getSession().setAttribute("vidDef", def);
+                request.getServletContext().setAttribute("vidDef", def);
             }catch(FileAlreadyExistsException faee){
                 faee.printStackTrace();
             }
@@ -72,7 +72,7 @@ public class videoServlet extends HttpServlet {
                 String tipo = Files.probeContentType(a.toPath());
                 Video a1 = new Video(0, a.getName(), "videos/"+a.getName(), vig, tipo);
                 VideoDAO.saveVideo(a1);
-                request.getSession().setAttribute("vid", VideoDAO.getVideo());
+                request.getServletContext().setAttribute("vid", VideoDAO.getVideo());
             }catch(FileAlreadyExistsException faee){
                 faee.printStackTrace();
             }

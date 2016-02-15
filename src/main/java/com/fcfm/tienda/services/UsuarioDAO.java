@@ -31,11 +31,12 @@ public class UsuarioDAO {
                 if(rs.getString(3).equals(passHex)){
                     //TODO GET ADRESSS
                     Imagen usrImg = ImagenDAO.getImagen(rs.getInt("idUsuario"));
+                    DomicilioDAO.getDomicilio(rs.getInt(12));
                     ses = new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),
                             rs.getString("passwordUsuario"),rs.getDate("ultimoAccesoUsuario"),
                             usrImg, rs.getBoolean("administrador"),
-                            rs.getString("nombreUsuario"), rs.getString("apellidosUsuario"),rs.getBoolean("sexo"),rs.getDate(9),
-                            rs.getString(10),null,rs.getString(12),rs.getString(13));
+                            rs.getString("nombreUsuario"), rs.getString("apellidosUsuario"),rs.getBoolean("sexo"),rs.getDate("fecha_nacimiento"),
+                            rs.getString(11),null,rs.getString(13),rs.getString(14));
                 }
             }
         }catch(SQLException e){
@@ -106,15 +107,19 @@ public class UsuarioDAO {
             int i =0;
             while(rs.next()){
                 Imagen usrImg = ImagenDAO.getImagen(rs.getInt("fotoUsuario"));
-                java.util.Date dat = new java.util.Date(rs.getDate(10).getTime());
+                java.sql.Date  d = rs.getDate(10);
+                java.util.Date dat = null;
+                if( d != null) {
+                    dat = new java.util.Date(d.getTime());
+                }
                 Domicilio dom = DomicilioDAO.getDomicilio(rs.getInt(12));
-                 result.add(new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
-                         rs.getDate("ultimoAccesoUsuario"),usrImg,rs.getBoolean("administrador"),
-                         rs.getString("nombreUsuario"),rs.getString("apellidosUsuario"),rs.getBoolean(9),dat,
-                         rs.getString(11),dom,rs.getString(13),rs.getString(14)));
+                 result.add(new Usuario(rs.getInt("idUsuario"), rs.getString("loginUsuario"), rs.getString("passwordUsuario"),
+                         rs.getDate("ultimoAccesoUsuario"), usrImg, rs.getBoolean("administrador"),
+                         rs.getString("nombreUsuario"), rs.getString("apellidosUsuario"), rs.getBoolean(9), dat,
+                         rs.getString(11), dom, rs.getString(13), rs.getString(14)));
                 i++;
             }
-            rs.close();
+            //rs.close();
             stmt.close();
             conn.close();
         }catch(Exception e){
@@ -131,7 +136,11 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             while(rs.next()){
                 Imagen usrImg = ImagenDAO.getImagen(rs.getInt("fotoUsuario"));
-                java.util.Date dat = new java.util.Date(rs.getDate(10).getTime());
+                java.sql.Date  d = rs.getDate(10);
+                java.util.Date dat = null;
+                if(d!=null){
+                dat = new java.util.Date(rs.getDate(10).getTime());
+                }
                 Domicilio dom = DomicilioDAO.getDomicilio(rs.getInt(12));
                 result = new Usuario(rs.getInt("idUsuario"),rs.getString("loginUsuario"),rs.getString("passwordUsuario"),
                         rs.getDate("ultimoAccesoUsuario"),usrImg,rs.getBoolean("administrador"),
@@ -162,7 +171,11 @@ public class UsuarioDAO {
                 PreparedStatement stmt = conn.prepareStatement("call updateusuario(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 stmt.setInt(1,act.getIdUsuario());
                 stmt.setString(2,act.getLoginUsuario());
-                stmt.setString(3,act.getPasswordUsuario());
+                if(!ant.getPasswordUsuario().equals(pass)) {
+                    stmt.setString(3, act.getPasswordUsuario());
+                }else{
+                    stmt.setString(3,act.getPasswordUsuario());
+                }
                 if(act.getFotoUsuario() != null){
                     stmt.setInt(4,act.getFotoUsuario().getIdImagen());
                 } else{
