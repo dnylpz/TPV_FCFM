@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>popup</title>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/skeleton.css">
+    <!--<link href='http://fonts.googleapis.com/css?family=Quicksand|Josefin+Slab' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/popup.css"
+  </head>
+  <body>
+    <div class="popup">
+      <div class="closepop">
+        <a href="#" id="cerrar" >X</a>
+      </div>
+      <div class="container">
+        <div class="row">
+          <h1 class="twelve columns head">Agregar un usuario</h1>
+        </div>
+        <div class="row">
+          <form action="/addUser" method="POST" id="addUser" class="twelve columns" enctype="multipart/form-data">
+            <div class="row">
+              <label class="three columns">Nombre de Usuario</label>
+              <input type="text" name="nombre" class="three columns"/>
+              <label class="three columns">Apellidos</label>
+              <input type="text" name="Apellidos" class="three columns"/>
+            </div>
+            <div class="row">
+              <label class="three columns ">Login de usuario </label>
+              <input type="text" name="username" class="three columns"/>
+              <label class="three columns ">Password</label>
+              <input type="password" name="password" class="three columns"/>
+            </div>
+            <div class="row">
+              <label class="two columns ">Foto</label>
+              <input type="file" name="fotoUsuario" class="four columns"/>
+              <label class="three columns">Es Administrador</label>
+              <input type="checkbox" name="isAdmin" value="true"/>
+            </div>
+            <div class="row">
+              <input type="submit" class="button three columns offset-by-four" value="Agregar"/>
+            </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
